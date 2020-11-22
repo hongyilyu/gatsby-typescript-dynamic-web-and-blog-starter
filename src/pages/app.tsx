@@ -1,14 +1,16 @@
-import React from "react"
-import { RandomPerson } from "../modules/RandomPerson"
-import { Router as MyRouter } from "@reach/router"
+import React from 'react';
+
+import { Router as MyRouter } from '@reach/router';
+
+import Dashboard from '../layouts/standard.layout';
 
 const Router = () => {
-  const sample = ""
   return (
     <MyRouter>
-      <RandomPerson path="/app/random-person/:results" />
+      <Dashboard path='/app/dashboard/:results' />
+      <Dashboard path='/app/dashboard' />
     </MyRouter>
-  )
-}
+  );
+};
 
-export default Router
+export default Router;
