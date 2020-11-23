@@ -19,6 +19,7 @@ import {
   HeaderMockUp,
   NavContentMockUp,
   NavHeaderMockUp,
+  //@ts-ignore
 } from '@mui-treasury/mockup/layout';
 import { RouteComponentProps } from '@reach/router';
 

@@ -19,12 +19,17 @@
     "gatsby-plugin-typescript": "^2.1.9",
     "gatsby-source-filesystem": "^2.6.0",
     "gatsby-transformer-sharp": "^2.7.0",
+    "graphql": "^14.6.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-helmet": "^5.2.1",
     "styled-components": "^5.1.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^1.19.2",
+    "@graphql-codegen/introspection": "^1.18.0",
+    "@graphql-codegen/typescript": "^1.17.11",
+    "@graphql-codegen/typescript-operations": "^1.17.10",
     "@types/reach__router": "^1.2.5",
     "@types/react-helmet": "^5.0.10",
     "@types/styled-components": "^5.1.4",
@@ -51,7 +56,8 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "lint": "eslint --ignore-path .gitignore . --ext ts --ext tsx --ext js --ext jsx",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \""
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \"",
+    "codegen": "graphql-codegen --config graphql-codegen.yml"
   },
   "repository": {
     "type": "git",
