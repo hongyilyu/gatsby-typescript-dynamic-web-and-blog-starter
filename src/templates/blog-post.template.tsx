@@ -1,11 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { graphql } from 'gatsby';
-import get from 'lodash/get';
-
-import SEO from '../components/SEO';
+import { graphql, PageProps } from 'gatsby';
 import Layout from '../layouts/wiki.layout';
 import WikiTitle from '../components/wiki-title.component';
+import Article from '../components/article/article.component';
 
 const ContentContainer = styled.div`
   min-height: 100vh;
@@ -64,17 +62,69 @@ const Sidebar = styled.aside`
   }
 `;
 
-const BlogPostTemplate: React.FC = () => {
-  return <Layout></Layout>;
+export interface MarkdownRemark {
+  id?: string;
+  excerpt?: string;
+  html: string;
+  frontmatter: {
+    title: string;
+    date: string;
+    path: string;
+    tags: string[];
+    edit_by: string[];
+  };
+}
+interface DataProps {
+  site: {
+    siteMetadata: {
+      title: string;
+    };
+  };
+  markdownRemark: MarkdownRemark;
+}
+
+const BlogPostTemplate: React.FC<PageProps<DataProps>> = ({ data }) => {
+  const { frontmatter } = data.markdownRemark;
+  return (
+    <Layout title={frontmatter.title}>
+      <WikiTitle>
+        <h1>
+          <span>{frontmatter.title}</span>
+        </h1>
+      </WikiTitle>
+      <ContentContainer>
+        <Content>
+          <Columns>
+            <MainColumn>
+              <Article post={data.markdownRemark} />
+            </MainColumn>
+            <Sidebar>
+              <span>Side bar here</span>
+            </Sidebar>
+          </Columns>
+        </Content>
+      </ContentContainer>
+    </Layout>
+  );
 };
 
 export default BlogPostTemplate;
 
 export const pageQuery = graphql`
-  {
+  query($path: String!) {
     site {
       siteMetadata {
         title
+      }
+    }
+    markdownRemark(frontmatter: { path: { eq: $path } }) {
+      html
+      frontmatter {
+        date(formatString: "MMMM DD, YYYY")
+        path
+        title
+        tags
+        edit_by
       }
     }
   }
