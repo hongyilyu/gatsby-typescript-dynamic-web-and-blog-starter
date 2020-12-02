@@ -4,7 +4,7 @@ import styled from 'styled-components';
 //@ts-ignore
 import defaultBg from '../images/cu-bg.jpg';
 
-const HeroContainer = styled.div`
+const WikiContainer = styled.div`
   background-color: #46c9e5;
   background-repeat: no-repeat;
   background-position: center;
@@ -49,7 +49,7 @@ const HeroContainer = styled.div`
   }
 `;
 
-const HeroContent = styled.div`
+const WikiContent = styled.div`
   display: table-cell;
   vertical-align: middle;
   text-align: center;
@@ -58,7 +58,8 @@ const HeroContent = styled.div`
   padding: 0 2em;
 
   color: white;
-  text-shadow: 1px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  text-shadow: 1px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
+    -1px 1px 0 #000, 1px 1px 0 #000;
 
   @media (min-width: 780px) {
     font-size: 1.2em;
@@ -92,14 +93,14 @@ const WikiTitle: React.FC<WikiTitleProps> = ({ children, backgroundImg }) => {
   const backgroundImage = backgroundImg || defaultBg;
 
   return (
-    <HeroContainer
+    <WikiContainer
       className='bottomRightBg'
       style={{
         backgroundImage: `url(${backgroundImage})`,
       }}
     >
-      <HeroContent>{children}</HeroContent>
-    </HeroContainer>
+      <WikiContent>{children}</WikiContent>
+    </WikiContainer>
   );
 };
 

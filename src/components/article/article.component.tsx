@@ -1,13 +1,12 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
-
-import ArticleContainer from './article.style';
 import DateViewer from '../date-viewer.component';
 import TagsList from '../tag-list.component';
 import Avatar from '../avatar.component';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import { MarkdownRemark } from 'src/templates/blog-post.template';
 import { Typography } from '@material-ui/core';
+import { Mdx } from 'src/graphql';
+import ContentWrapper from './content.component';
 
 const SectionContainer = styled.div`
   margin: 2em 0;
@@ -51,17 +50,18 @@ const GitHubSectionContainer = styled.div`
   }
 `;
 
-const Article: React.FC<{ post: MarkdownRemark }> = ({ post }) => {
+const Article: React.FC<{ post: Mdx }> = ({ post }) => {
   const githubLink = 'github.com/lhy-is-learning';
   return (
     <Fragment>
       <SectionContainer>
         <Typography>
-          <DateViewer date={post.frontmatter.date} />— Created by <Avatar name='LHY-iS-Learning' />
+          <DateViewer date={post.frontmatter!.date} /> Created by{' '}
+          <Avatar name='LHY-iS-Learning' />
         </Typography>
-        <TagsList tags={post.frontmatter.tags} />
+        <TagsList tags={post.frontmatter!.tags! as string[]} />
       </SectionContainer>
-      <ArticleContainer dangerouslySetInnerHTML={{ __html: post.html }} />
+      <ContentWrapper element={post.body} />
       <GitHubSectionContainer>
         <strong>Found a typo or something that can be improved?</strong>
         <br />

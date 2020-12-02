@@ -1,4 +1,3 @@
-import { Link } from 'gatsby';
 import styled from 'styled-components';
 import React from 'react';
 import { getHeader } from '@mui-treasury/layout';
@@ -6,11 +5,14 @@ import {
   HeaderMockUp,
   //@ts-ignore
 } from '@mui-treasury/mockup/layout';
+import { Toolbar } from '@material-ui/core';
 
 const HeaderStyle = getHeader(styled);
 const Header: React.FC = () => (
   <HeaderStyle>
-    <HeaderMockUp />
+    <Toolbar>
+      <HeaderMockUp />
+    </Toolbar>
   </HeaderStyle>
 );
 
