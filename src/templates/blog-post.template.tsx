@@ -8,6 +8,7 @@ import { PostsBySlugQuery } from 'src/graphql';
 
 const PostWrapper = styled.article`
   padding-bottom: 5rem;
+  position: relative;
   h1 {
   }
   small {
