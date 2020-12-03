@@ -14,7 +14,7 @@ export const Toc = styled.aside`
   position: sticky;
   left: calc(80% + 400px);
   top: 30vh;
-  max-height: 50vh;
+  max-height: 62vh;
   width: 310px;
   display: flex;
   flex-direction: column;

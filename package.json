@@ -20,6 +20,7 @@
     "gatsby-plugin-sharp": "^2.9.0",
     "gatsby-plugin-styled-components": "^3.5.0",
     "gatsby-plugin-typescript": "^2.1.9",
+    "gatsby-plugin-use-dark-mode": "^1.2.0",
     "gatsby-remark-autolink-headers": "^2.7.0",
     "gatsby-remark-copy-linked-files": "^2.6.0",
     "gatsby-remark-images": "^3.6.0",
@@ -38,6 +39,7 @@
     "styled-breakpoints": "^9.0.1",
     "styled-components": "^5.1.0",
     "styled-reset": "^4.3.1",
+    "use-dark-mode": "^2.3.1",
     "victormono": "^1.4.2",
     "yarn": "^1.22.10"
   },
@@ -50,6 +52,7 @@
     "@types/reach__router": "^1.2.5",
     "@types/react-helmet": "^5.0.10",
     "@types/styled-components": "^5.1.4",
+    "@types/use-dark-mode": "^2.3.1",
     "@typescript-eslint/eslint-plugin": "^2.3.2",
     "@typescript-eslint/parser": "^2.3.2",
     "eslint": "^6.5.1",

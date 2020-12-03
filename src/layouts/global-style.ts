@@ -1,10 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 import { CustomScroll } from '../components/custom-element/shared-style.util';
+import { themeVariables } from './theme';
 
 export const GlobalStyle = createGlobalStyle`
   ${reset}
   ${CustomScroll}
+  ${themeVariables}
   *, *:before, *:after {
     box-sizing: border-box;
   }
