@@ -4,21 +4,30 @@ import Layout, { Root } from '@mui-treasury/layout';
 import Footer from '../components/footer.component';
 import Header from '../components/header.component';
 import SEO from '../components/SEO';
-import { theme } from './theme';
+import styled from 'styled-components';
+import BlogWrapper from './blog.wrapper';
 
 const scheme = Layout();
-interface WikiLayoutProps {
-  title: string;
-}
 
-const WikiLayout: React.FC<WikiLayoutProps> = ({ title, children }) => {
+const Styles = styled.main`
+  position: relative;
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 0 20px;
+`;
+
+const WikiLayout: React.FC = ({ children }) => {
   return (
-    <Root scheme={scheme} theme={theme(false)}>
-      <SEO title={title} />
-      <Header />
-      <div style={{ scrollBehavior: 'smooth' }}>{children}</div>
-      <Footer />
-    </Root>
+    <BlogWrapper>
+      <Root scheme={scheme}>
+        <Styles>
+          <SEO title={`test`} />
+          <Header />
+          {children}
+          <Footer />
+        </Styles>
+      </Root>
+    </BlogWrapper>
   );
 };
 

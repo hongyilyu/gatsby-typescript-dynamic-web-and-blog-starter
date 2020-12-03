@@ -22,60 +22,51 @@ exports.onCreatePage = async ({ page, actions }) => {
   }
 };
 
-exports.createPages = ({ actions, graphql }) => {
+exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
-
   const postTemplate = path.resolve('src/templates/blog-post.template.tsx');
-
-  return graphql(`
+  const result = await graphql(`
     {
-      allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+      allMdx {
         nodes {
           frontmatter {
+            slug
+            tags
+          }
+          fields {
             slug
           }
         }
       }
     }
-  `).then((result) => {
-    if (result.errors) {
-      throw result.errors;
-    }
+  `);
 
-    const posts = result.data.allMdx.nodes;
+  if (result.errors) {
+    reporter.panic(`Error loading posts`, JSON.stringify(result.errors));
+  }
 
-    posts.forEach((post, index) => {
-      createPage({
-        path: post.frontmatter.slug,
-        component: postTemplate,
-        context: {
-          slug: post.frontmatter.slug,
-        },
-      });
+  const posts = result.data.allMdx.nodes;
+
+  // create page for each mdx file
+  posts.forEach((post) => {
+    createPage({
+      path: post.frontmatter.slug,
+      component: postTemplate,
+      context: {
+        slug: post.frontmatter.slug,
+      },
     });
   });
 };
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
-  if (node.internal.type === `Mdx`) {
-    const value = createFilePath({ node, getNode });
+
+  if (node.internal.type === 'Mdx') {
     createNodeField({
-      name: `slug`,
+      name: 'slug',
       node,
-      value,
+      value: node.frontmatter.slug,
     });
   }
 };
-//// Extract tag data from query
-//const tags = result.data.tagsGroup.group;
-//// Make tag pages
-//tags.forEach((tag) => {
-//  createPage({
-//    path: `/tags/${_.kebabCase(tag.fieldValue)}/`,
-//    component: tagTemplate,
-//    context: {
-//      tag: tag.fieldValue,
-//    },
-//  });
-//});

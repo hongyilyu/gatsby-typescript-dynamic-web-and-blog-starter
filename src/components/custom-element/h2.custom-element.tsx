@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { AutoLink } from './linked-headers.custom-element';
 
 const StyledH2 = styled.h2`
+  border-top: 1px solid #ececec;
+  padding-top: 2.1em;
   font-size: 1.875rem;
   margin-top: 2rem;
   line-height: 1;

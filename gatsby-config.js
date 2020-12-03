@@ -6,6 +6,9 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -20,24 +23,24 @@ module.exports = {
         path: `${__dirname}/content`,
       },
     },
-    `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [`.mdx`, `.md`],
         gatsbyRemarkPlugins: [
           `gatsby-remark-autolink-headers`,
-          `gatsby-remark-smartypants`,
           {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 1200,
             },
           },
+          {
+            resolve: 'gatsby-remark-copy-linked-files',
+          },
         ],
       },
     },
-    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-material-ui`,
       options: {
@@ -46,7 +49,6 @@ module.exports = {
         },
       },
     },
-    `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

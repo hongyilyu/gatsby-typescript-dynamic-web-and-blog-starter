@@ -1,6 +1,7 @@
-import { MDXProvider } from '@mdx-js/react';
-import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React from 'react';
+
+import { MDXProvider } from '@mdx-js/react';
+
 import {
   A,
   Blockquote,
@@ -15,8 +16,10 @@ import {
   Ol,
   P,
   Table,
-} from '../custom-element';
+} from '../components/custom-element';
+import { GlobalStyle } from './global-style';
 
+const { preToCodeBlock } = require('mdx-utils');
 const components = {
   a: (props: any) => <A {...props} />,
   h1: (props: any) => <H1 {...props} />,
@@ -25,6 +28,15 @@ const components = {
   h4: (props: any) => <H4 {...props} />,
   hr: (props: any) => <Hr {...props} />,
   'p.inlineCode': (props: any) => <InlineCode {...props} />,
+  pre: (preProps: any) => {
+    const props = preToCodeBlock(preProps);
+    // if there's a codeString and some props, we passed the test
+    if (props) {
+      return <Code {...props} />;
+    }
+    // it's possible to have a pre without a code in it
+    return <pre {...preProps} />;
+  },
   blockquote: (props: any) => <Blockquote {...props} />,
   table: (props: any) => <Table {...props} />,
   li: (props: any) => <Li {...props} />,
@@ -32,12 +44,13 @@ const components = {
   ol: (props: any) => <Ol {...props} />,
 };
 
-const ContentWrapper: React.FC<{ element: any }> = ({ element }) => {
+const BlogWrapper: React.FC = ({ children }) => {
   return (
-    <MDXProvider components={components}>
-      <MDXRenderer>{element}</MDXRenderer>
-    </MDXProvider>
+    <>
+      <GlobalStyle />
+      <MDXProvider components={components}>{children}</MDXProvider>
+    </>
   );
 };
 
-export default ContentWrapper;
+export default BlogWrapper;

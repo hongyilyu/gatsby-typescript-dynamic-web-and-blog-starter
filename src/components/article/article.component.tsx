@@ -6,7 +6,9 @@ import Avatar from '../avatar.component';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import { Typography } from '@material-ui/core';
 import { Mdx } from 'src/graphql';
-import ContentWrapper from './content.component';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
+import WikiLayout from '../../layouts/wiki.layout';
+import TableOfContent from '../table-of-content.component';
 
 const SectionContainer = styled.div`
   margin: 2em 0;
@@ -53,15 +55,15 @@ const GitHubSectionContainer = styled.div`
 const Article: React.FC<{ post: Mdx }> = ({ post }) => {
   const githubLink = 'github.com/lhy-is-learning';
   return (
-    <Fragment>
+    <WikiLayout>
       <SectionContainer>
         <Typography>
-          <DateViewer date={post.frontmatter!.date} /> Created by{' '}
+          <DateViewer date={post!.frontmatter!.date} /> Created by{' '}
           <Avatar name='LHY-iS-Learning' />
         </Typography>
         <TagsList tags={post.frontmatter!.tags! as string[]} />
       </SectionContainer>
-      <ContentWrapper element={post.body} />
+      <MDXRenderer>{post.body}</MDXRenderer>
       <GitHubSectionContainer>
         <strong>Found a typo or something that can be improved?</strong>
         <br />
@@ -80,7 +82,7 @@ const Article: React.FC<{ post: Mdx }> = ({ post }) => {
       >
         Comments here maybe
       </SectionContainer>
-    </Fragment>
+    </WikiLayout>
   );
 };
 

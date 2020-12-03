@@ -1,5 +1,7 @@
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -702,12 +704,8 @@ export enum FileFieldsEnum {
   ChildMdxFileAbsolutePath = 'childMdx___fileAbsolutePath',
   ChildMdxFrontmatterTitle = 'childMdx___frontmatter___title',
   ChildMdxFrontmatterDate = 'childMdx___frontmatter___date',
-  ChildMdxFrontmatterPath = 'childMdx___frontmatter___path',
   ChildMdxFrontmatterSlug = 'childMdx___frontmatter___slug',
   ChildMdxFrontmatterTags = 'childMdx___frontmatter___tags',
-  ChildMdxFrontmatterEditBy = 'childMdx___frontmatter___edit_by',
-  ChildMdxFrontmatterUuid = 'childMdx___frontmatter___uuid',
-  ChildMdxFrontmatterLayout = 'childMdx___frontmatter___layout',
   ChildMdxFrontmatterUpdated = 'childMdx___frontmatter___updated',
   ChildMdxFrontmatterAuthor = 'childMdx___frontmatter___author',
   ChildMdxFrontmatterAuthorSlug = 'childMdx___frontmatter___author_slug',
@@ -819,8 +817,6 @@ export enum FileFieldsEnum {
   ChildMdxFrontmatterTwImgPublicUrl = 'childMdx___frontmatter___tw_img___publicURL',
   ChildMdxFrontmatterTwImgId = 'childMdx___frontmatter___tw_img___id',
   ChildMdxFrontmatterTwImgChildren = 'childMdx___frontmatter___tw_img___children',
-  ChildMdxFrontmatterStatus = 'childMdx___frontmatter___status',
-  ChildMdxFrontmatterLanguage = 'childMdx___frontmatter___language',
   ChildMdxSlug = 'childMdx___slug',
   ChildMdxBody = 'childMdx___body',
   ChildMdxExcerpt = 'childMdx___excerpt',
@@ -1627,12 +1623,8 @@ export enum MdxFieldsEnum {
   FileAbsolutePath = 'fileAbsolutePath',
   FrontmatterTitle = 'frontmatter___title',
   FrontmatterDate = 'frontmatter___date',
-  FrontmatterPath = 'frontmatter___path',
   FrontmatterSlug = 'frontmatter___slug',
   FrontmatterTags = 'frontmatter___tags',
-  FrontmatterEditBy = 'frontmatter___edit_by',
-  FrontmatterUuid = 'frontmatter___uuid',
-  FrontmatterLayout = 'frontmatter___layout',
   FrontmatterUpdated = 'frontmatter___updated',
   FrontmatterAuthor = 'frontmatter___author',
   FrontmatterAuthorSlug = 'frontmatter___author_slug',
@@ -1861,8 +1853,6 @@ export enum MdxFieldsEnum {
   FrontmatterTwImgChildMdxTimeToRead = 'frontmatter___tw_img___childMdx___timeToRead',
   FrontmatterTwImgChildMdxId = 'frontmatter___tw_img___childMdx___id',
   FrontmatterTwImgChildMdxChildren = 'frontmatter___tw_img___childMdx___children',
-  FrontmatterStatus = 'frontmatter___status',
-  FrontmatterLanguage = 'frontmatter___language',
   Slug = 'slug',
   Body = 'body',
   Excerpt = 'excerpt',
@@ -1993,12 +1983,8 @@ export type MdxFrontmatter = {
   __typename?: 'MdxFrontmatter';
   title: Scalars['String'];
   date?: Maybe<Scalars['Date']>;
-  path?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
   tags?: Maybe<Array<Maybe<Scalars['String']>>>;
-  edit_by?: Maybe<Scalars['String']>;
-  uuid?: Maybe<Scalars['String']>;
-  layout?: Maybe<Scalars['String']>;
   updated?: Maybe<Scalars['Date']>;
   author?: Maybe<Scalars['String']>;
   author_slug?: Maybe<Scalars['String']>;
@@ -2006,8 +1992,6 @@ export type MdxFrontmatter = {
   test_img?: Maybe<MdxFrontmatterTest_Img>;
   fb_img?: Maybe<File>;
   tw_img?: Maybe<File>;
-  status?: Maybe<Scalars['String']>;
-  language?: Maybe<Scalars['String']>;
 };
 
 
@@ -2029,12 +2013,8 @@ export type MdxFrontmatterUpdatedArgs = {
 export type MdxFrontmatterFilterInput = {
   title?: Maybe<StringQueryOperatorInput>;
   date?: Maybe<DateQueryOperatorInput>;
-  path?: Maybe<StringQueryOperatorInput>;
   slug?: Maybe<StringQueryOperatorInput>;
   tags?: Maybe<StringQueryOperatorInput>;
-  edit_by?: Maybe<StringQueryOperatorInput>;
-  uuid?: Maybe<StringQueryOperatorInput>;
-  layout?: Maybe<StringQueryOperatorInput>;
   updated?: Maybe<DateQueryOperatorInput>;
   author?: Maybe<StringQueryOperatorInput>;
   author_slug?: Maybe<StringQueryOperatorInput>;
@@ -2042,8 +2022,6 @@ export type MdxFrontmatterFilterInput = {
   test_img?: Maybe<MdxFrontmatterTest_ImgFilterInput>;
   fb_img?: Maybe<FileFilterInput>;
   tw_img?: Maybe<FileFilterInput>;
-  status?: Maybe<StringQueryOperatorInput>;
-  language?: Maybe<StringQueryOperatorInput>;
 };
 
 export type MdxFrontmatterTest_Img = {
@@ -2938,21 +2916,21 @@ export enum SitePageFieldsEnum {
   PluginCreatorResolve = 'pluginCreator___resolve',
   PluginCreatorName = 'pluginCreator___name',
   PluginCreatorVersion = 'pluginCreator___version',
-  PluginCreatorPluginOptionsName = 'pluginCreator___pluginOptions___name',
-  PluginCreatorPluginOptionsPath = 'pluginCreator___pluginOptions___path',
-  PluginCreatorPluginOptionsExtensions = 'pluginCreator___pluginOptions___extensions',
-  PluginCreatorPluginOptionsLessBabel = 'pluginCreator___pluginOptions___lessBabel',
-  PluginCreatorPluginOptionsMediaTypes = 'pluginCreator___pluginOptions___mediaTypes',
   PluginCreatorPluginOptionsBase64Width = 'pluginCreator___pluginOptions___base64Width',
   PluginCreatorPluginOptionsStripMetadata = 'pluginCreator___pluginOptions___stripMetadata',
   PluginCreatorPluginOptionsDefaultQuality = 'pluginCreator___pluginOptions___defaultQuality',
   PluginCreatorPluginOptionsFailOnError = 'pluginCreator___pluginOptions___failOnError',
-  PluginCreatorPluginOptionsStylesProviderInjectFirst = 'pluginCreator___pluginOptions___stylesProvider___injectFirst',
   PluginCreatorPluginOptionsDisplayName = 'pluginCreator___pluginOptions___displayName',
   PluginCreatorPluginOptionsFileName = 'pluginCreator___pluginOptions___fileName',
   PluginCreatorPluginOptionsMinify = 'pluginCreator___pluginOptions___minify',
   PluginCreatorPluginOptionsTranspileTemplateLiterals = 'pluginCreator___pluginOptions___transpileTemplateLiterals',
   PluginCreatorPluginOptionsPure = 'pluginCreator___pluginOptions___pure',
+  PluginCreatorPluginOptionsName = 'pluginCreator___pluginOptions___name',
+  PluginCreatorPluginOptionsPath = 'pluginCreator___pluginOptions___path',
+  PluginCreatorPluginOptionsExtensions = 'pluginCreator___pluginOptions___extensions',
+  PluginCreatorPluginOptionsLessBabel = 'pluginCreator___pluginOptions___lessBabel',
+  PluginCreatorPluginOptionsMediaTypes = 'pluginCreator___pluginOptions___mediaTypes',
+  PluginCreatorPluginOptionsStylesProviderInjectFirst = 'pluginCreator___pluginOptions___stylesProvider___injectFirst',
   PluginCreatorPluginOptionsShortName = 'pluginCreator___pluginOptions___short_name',
   PluginCreatorPluginOptionsStartUrl = 'pluginCreator___pluginOptions___start_url',
   PluginCreatorPluginOptionsBackgroundColor = 'pluginCreator___pluginOptions___background_color',
@@ -3161,21 +3139,21 @@ export enum SitePluginFieldsEnum {
   Resolve = 'resolve',
   Name = 'name',
   Version = 'version',
-  PluginOptionsName = 'pluginOptions___name',
-  PluginOptionsPath = 'pluginOptions___path',
-  PluginOptionsExtensions = 'pluginOptions___extensions',
-  PluginOptionsLessBabel = 'pluginOptions___lessBabel',
-  PluginOptionsMediaTypes = 'pluginOptions___mediaTypes',
   PluginOptionsBase64Width = 'pluginOptions___base64Width',
   PluginOptionsStripMetadata = 'pluginOptions___stripMetadata',
   PluginOptionsDefaultQuality = 'pluginOptions___defaultQuality',
   PluginOptionsFailOnError = 'pluginOptions___failOnError',
-  PluginOptionsStylesProviderInjectFirst = 'pluginOptions___stylesProvider___injectFirst',
   PluginOptionsDisplayName = 'pluginOptions___displayName',
   PluginOptionsFileName = 'pluginOptions___fileName',
   PluginOptionsMinify = 'pluginOptions___minify',
   PluginOptionsTranspileTemplateLiterals = 'pluginOptions___transpileTemplateLiterals',
   PluginOptionsPure = 'pluginOptions___pure',
+  PluginOptionsName = 'pluginOptions___name',
+  PluginOptionsPath = 'pluginOptions___path',
+  PluginOptionsExtensions = 'pluginOptions___extensions',
+  PluginOptionsLessBabel = 'pluginOptions___lessBabel',
+  PluginOptionsMediaTypes = 'pluginOptions___mediaTypes',
+  PluginOptionsStylesProviderInjectFirst = 'pluginOptions___stylesProvider___injectFirst',
   PluginOptionsShortName = 'pluginOptions___short_name',
   PluginOptionsStartUrl = 'pluginOptions___start_url',
   PluginOptionsBackgroundColor = 'pluginOptions___background_color',
@@ -3314,21 +3292,21 @@ export type SitePluginPackageJsonPeerDependenciesFilterListInput = {
 
 export type SitePluginPluginOptions = {
   __typename?: 'SitePluginPluginOptions';
-  name?: Maybe<Scalars['String']>;
-  path?: Maybe<Scalars['String']>;
-  extensions?: Maybe<Array<Maybe<Scalars['String']>>>;
-  lessBabel?: Maybe<Scalars['Boolean']>;
-  mediaTypes?: Maybe<Array<Maybe<Scalars['String']>>>;
   base64Width?: Maybe<Scalars['Int']>;
   stripMetadata?: Maybe<Scalars['Boolean']>;
   defaultQuality?: Maybe<Scalars['Int']>;
   failOnError?: Maybe<Scalars['Boolean']>;
-  stylesProvider?: Maybe<SitePluginPluginOptionsStylesProvider>;
   displayName?: Maybe<Scalars['Boolean']>;
   fileName?: Maybe<Scalars['Boolean']>;
   minify?: Maybe<Scalars['Boolean']>;
   transpileTemplateLiterals?: Maybe<Scalars['Boolean']>;
   pure?: Maybe<Scalars['Boolean']>;
+  name?: Maybe<Scalars['String']>;
+  path?: Maybe<Scalars['String']>;
+  extensions?: Maybe<Array<Maybe<Scalars['String']>>>;
+  lessBabel?: Maybe<Scalars['Boolean']>;
+  mediaTypes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  stylesProvider?: Maybe<SitePluginPluginOptionsStylesProvider>;
   short_name?: Maybe<Scalars['String']>;
   start_url?: Maybe<Scalars['String']>;
   background_color?: Maybe<Scalars['String']>;
@@ -3348,21 +3326,21 @@ export type SitePluginPluginOptions = {
 };
 
 export type SitePluginPluginOptionsFilterInput = {
-  name?: Maybe<StringQueryOperatorInput>;
-  path?: Maybe<StringQueryOperatorInput>;
-  extensions?: Maybe<StringQueryOperatorInput>;
-  lessBabel?: Maybe<BooleanQueryOperatorInput>;
-  mediaTypes?: Maybe<StringQueryOperatorInput>;
   base64Width?: Maybe<IntQueryOperatorInput>;
   stripMetadata?: Maybe<BooleanQueryOperatorInput>;
   defaultQuality?: Maybe<IntQueryOperatorInput>;
   failOnError?: Maybe<BooleanQueryOperatorInput>;
-  stylesProvider?: Maybe<SitePluginPluginOptionsStylesProviderFilterInput>;
   displayName?: Maybe<BooleanQueryOperatorInput>;
   fileName?: Maybe<BooleanQueryOperatorInput>;
   minify?: Maybe<BooleanQueryOperatorInput>;
   transpileTemplateLiterals?: Maybe<BooleanQueryOperatorInput>;
   pure?: Maybe<BooleanQueryOperatorInput>;
+  name?: Maybe<StringQueryOperatorInput>;
+  path?: Maybe<StringQueryOperatorInput>;
+  extensions?: Maybe<StringQueryOperatorInput>;
+  lessBabel?: Maybe<BooleanQueryOperatorInput>;
+  mediaTypes?: Maybe<StringQueryOperatorInput>;
+  stylesProvider?: Maybe<SitePluginPluginOptionsStylesProviderFilterInput>;
   short_name?: Maybe<StringQueryOperatorInput>;
   start_url?: Maybe<StringQueryOperatorInput>;
   background_color?: Maybe<StringQueryOperatorInput>;
@@ -3491,10 +3469,10 @@ export type PostsBySlugQuery = (
   { __typename?: 'Query' }
   & { mdx?: Maybe<(
     { __typename?: 'Mdx' }
-    & Pick<Mdx, 'body' | 'tableOfContents' | 'timeToRead' | 'slug'>
+    & Pick<Mdx, 'body' | 'tableOfContents'>
     & { frontmatter?: Maybe<(
       { __typename?: 'MdxFrontmatter' }
-      & Pick<MdxFrontmatter, 'title' | 'tags' | 'date'>
+      & Pick<MdxFrontmatter, 'title' | 'date' | 'tags'>
     )> }
   )> }
 );

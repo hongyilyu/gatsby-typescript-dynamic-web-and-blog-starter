@@ -5,7 +5,16 @@ import theme from 'prism-react-renderer/themes/nightOwl';
 import React from 'react';
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live';
 import styled from 'styled-components';
+
 import { codeStyle } from './code-style.theme';
+
+type CodeProps = {
+  codeString: string;
+  language: Language;
+  noLineNumbers?: boolean;
+  metastring?: string;
+  [key: string]: any;
+};
 
 function getParams(className = ``) {
   const [lang = ``, params = ``] = className.split(`:`);
@@ -30,22 +39,21 @@ function getParams(className = ``) {
 
 const RE = /{([\d,-]+)}/;
 
-function calculateLinesToHighlight(meta: string) {
-  if (RE.test(meta)) {
-    const lineNumbers = RE.exec(meta)![1]
-      .split(',')
-      .map((v) => v.split('-').map((y) => parseInt(y, 10)));
-    return (index: number) => {
-      const lineNumber = index + 1;
-      const inRange = lineNumbers.some(([start, end]) =>
-        end ? lineNumber >= start && lineNumber <= end : lineNumber === start
-      );
-      return inRange;
-    };
-  } else {
+const calculateLinesToHighlight = (meta: string) => {
+  if (!RE.test(meta)) {
     return () => false;
   }
-}
+  const lineNumbers = RE.exec(meta)![1]
+    .split(`,`)
+    .map((v) => v.split(`-`).map((x) => parseInt(x, 10)));
+  return (index: number) => {
+    const lineNumber = index + 1;
+    const inRange = lineNumbers.some(([start, end]) =>
+      end ? lineNumber >= start && lineNumber <= end : lineNumber === start
+    );
+    return inRange;
+  };
+};
 
 const CodeWrapper = styled.div`
   ${codeStyle}
@@ -85,14 +93,6 @@ export type Language =
   | 'wasm'
   | 'yaml';
 
-type CodeProps = {
-  codeString: string;
-  language: Language;
-  noLineNumbers?: boolean;
-  metastring?: string;
-  [key: string]: any;
-};
-
 export const Code: React.FC<CodeProps> = ({
   codeString,
   noLineNumbers = false,
@@ -102,7 +102,8 @@ export const Code: React.FC<CodeProps> = ({
 }) => {
   const showLineNumbers = true;
 
-  const [language, title = ``] = getParams(blockClassName);
+  //@ts-ignore
+  const [language, { title = `` }] = getParams(blockClassName);
   const shouldHighlightLine = calculateLinesToHighlight(metastring);
 
   const hasLineNumbers =
