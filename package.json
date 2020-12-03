@@ -63,7 +63,9 @@
     "typescript": "^3.6.3"
   },
   "keywords": [
-    "gatsby"
+    "gatsby",
+    "typescript",
+    "cra"
   ],
   "license": "MIT",
   "scripts": {
@@ -78,9 +80,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/LHY-iS-Learning/gatsby-typescript-dynamic-web-and-blog-starter"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/LHY-iS-Learning/gatsby-typescript-dynamic-web-and-blog-starter/issues"
   }
 }
