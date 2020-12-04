@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { graphql, PageProps } from 'gatsby';
 import WikiTitle from '../components/wiki-title.component';
@@ -17,7 +17,7 @@ const PostWrapper = styled.article`
 const TocWrapper = styled.div`
   position: absolute;
   top: 0;
-  right: 5vw;
+  right: 10vw;
   height: 100%;
 `;
 

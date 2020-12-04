@@ -14,7 +14,7 @@ interface DataProps {
 const IndexPage: React.FC<PageProps<DataProps>> = ({ data, path }) => {
   const title = data.site.siteMetadata.title;
   return (
-    <Layout title={title}>
+    <Layout>
       <SEO title='Home' />
       <h1>Hi people</h1>
       <p>Welcome to your new Gatsby site.</p>

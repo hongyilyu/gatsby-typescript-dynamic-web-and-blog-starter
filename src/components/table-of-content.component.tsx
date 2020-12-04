@@ -6,7 +6,6 @@ import {
   linkHover,
   linkStyle,
 } from './custom-element/shared-style.util';
-import { A } from './custom-element/a.custom-element';
 import reset from 'styled-reset';
 
 export const Toc = styled.aside`
@@ -69,9 +68,9 @@ const TableOfContent: React.FC<{ toc: any }> = ({ toc }) => {
           <ul>
             {toc.items.map((i: any) => (
               <li key={i.url}>
-                <A href={i.url} key={i.url}>
+                <a href={i.url} key={i.url}>
                   {i.title}
-                </A>
+                </a>
               </li>
             ))}
           </ul>

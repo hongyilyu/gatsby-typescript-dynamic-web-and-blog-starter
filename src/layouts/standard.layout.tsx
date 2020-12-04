@@ -19,11 +19,11 @@ import {
   HeaderMockUp,
   NavContentMockUp,
   NavHeaderMockUp,
-  //@ts-ignore
 } from '@mui-treasury/mockup/layout';
 import { RouteComponentProps } from '@reach/router';
 
-const Header = getHeader(styled);
+import Header from '../components/header.component';
+
 const DrawerSidebar = getDrawerSidebar(styled);
 const SidebarTrigger = getSidebarTrigger(styled);
 const SidebarContent = getSidebarContent(styled);
@@ -64,10 +64,7 @@ const Dashboard: React.FC<DashboardProps> = ({ results = 2 }) => {
         <>
           <CssBaseline />
           <Header>
-            <Toolbar>
-              <SidebarTrigger sidebarId='unique_id' />
-              <HeaderMockUp />
-            </Toolbar>
+            <SidebarTrigger sidebarId='unique_id' />
           </Header>
           <DrawerSidebar sidebarId='unique_id'>
             <SidebarContent>
