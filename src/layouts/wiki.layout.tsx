@@ -11,9 +11,6 @@ const scheme = Layout();
 
 const Styles = styled.main`
   position: relative;
-  max-width: 750px;
-  margin: 0 auto;
-  padding: 0 20px;
 `;
 
 const WikiLayout: React.FC = ({ children }) => {

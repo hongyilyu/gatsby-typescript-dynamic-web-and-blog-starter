@@ -30,11 +30,17 @@ const SectionContainer = styled.div`
 const PreArticle: React.FC<{ post: Mdx }> = ({ post: { frontmatter } }) => {
   return (
     <SectionContainer>
-      <Typography>
-        <DateViewer date={frontmatter!.date} /> Created by{' '}
-        <Avatar name='LHY-iS-Learning' />
-      </Typography>
-      <TagsList tags={frontmatter!.tags as string[]} />
+      <div>
+        <Typography>
+          <DateViewer date={frontmatter!.date} />
+        </Typography>
+        <Typography>
+          {`Created By `}
+          <Avatar name='LHY-iS-Learning' />
+        </Typography>
+
+        <TagsList tags={frontmatter!.tags as string[]} />
+      </div>
     </SectionContainer>
   );
 };

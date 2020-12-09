@@ -100,7 +100,7 @@ export const Code: React.FC<CodeProps> = ({
   metastring = ``,
   ...props
 }) => {
-  const showLineNumbers = true;
+  const showLineNumbers = false;
 
   //@ts-ignore
   const [language, { title = `` }] = getParams(blockClassName);

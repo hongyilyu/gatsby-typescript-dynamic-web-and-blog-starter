@@ -1,7 +1,6 @@
 // https://github.com/LekoArts/gatsby-themes/blob/master/themes/gatsby-theme-minimal-blog/src/styles/code.ts
 import { css } from 'styled-components';
 import 'victormono';
-import { negMargin } from './shared-style.util';
 
 export const codeStyle = css`
   font-family: 'Victor Mono', 'Courier New', Courier, monospace;
@@ -45,14 +44,12 @@ export const codeStyle = css`
   }
   .gatsby-highlight {
     position: relative;
-    ${negMargin};
     margin-top: 1.5rem;
     -webkit-overflow-scrolling: touch;
     background: rgb(1, 22, 39);
     overflow: auto;
     border-radius: 2px;
     .token-line {
-      margin: 0 -1.3rem;
     }
     pre.language- {
       margin-top: 0;

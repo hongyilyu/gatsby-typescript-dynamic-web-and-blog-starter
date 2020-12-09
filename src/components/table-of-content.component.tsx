@@ -8,10 +8,14 @@ import {
 } from './custom-element/shared-style.util';
 import reset from 'styled-reset';
 
-export const Toc = styled.aside`
+const TocWrapper = styled.div`
+  position: absolute;
+  height: 100%;
+`;
+
+const Toc = styled.div`
   ${reset};
   position: sticky;
-  left: calc(80% + 400px);
   top: 30vh;
   max-height: 62vh;
   width: 310px;
@@ -72,26 +76,28 @@ const TableOfContent: React.FC<{ toc: any }> = ({ toc }) => {
   return (
     <>
       {typeof toc.items === 'undefined' ? null : (
-        <Toc>
-          <h3>Table of contents</h3>
-          <ul>
-            {toc.items.map((i: any) => (
-              <li key={i.url}>
-                <a href={i.url} key={i.url}>
-                  {i.title}
-                </a>
-                {i.items &&
-                  i.items.map((ii: any) => (
-                    <li className={`depth-2`} key={ii.url}>
-                      <a href={ii.url} key={ii.url}>
-                        {`${ii.title}`}
-                      </a>
-                    </li>
-                  ))}
-              </li>
-            ))}
-          </ul>
-        </Toc>
+        <TocWrapper>
+          <Toc>
+            <h3>Table of contents</h3>
+            <ul>
+              {toc.items.map((i: any) => (
+                <li key={i.url}>
+                  <a href={i.url} key={i.url}>
+                    {i.title}
+                  </a>
+                  {i.items &&
+                    i.items.map((ii: any) => (
+                      <li className={`depth-2`} key={ii.url}>
+                        <a href={ii.url} key={ii.url}>
+                          {`${ii.title}`}
+                        </a>
+                      </li>
+                    ))}
+                </li>
+              ))}
+            </ul>
+          </Toc>
+        </TocWrapper>
       )}
     </>
   );
