@@ -30,6 +30,7 @@ module.exports = {
         extensions: [`.mdx`, `.md`],
         gatsbyRemarkPlugins: [
           `gatsby-remark-smartypants`,
+          `gatsby-remark-external-links`,
           {
             resolve: `gatsby-remark-autolink-headers`,
             options: {

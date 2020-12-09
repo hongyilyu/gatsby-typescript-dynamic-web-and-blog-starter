@@ -4,7 +4,7 @@ import { graphql, PageProps } from 'gatsby';
 import WikiTitle from '../components/wiki-title.component';
 import Article from '../components/article/article.component';
 import TableOfContent from '../components/table-of-content.component';
-import { PostsBySlugQuery } from 'src/graphql';
+import { Mdx, PostsBySlugQuery } from 'src/graphql';
 
 const PostWrapper = styled.article`
   padding-bottom: 5rem;
@@ -36,7 +36,7 @@ const BlogPostTemplate: React.FC<PageProps<PostsBySlugQuery>> = ({
         <TocWrapper>
           <TableOfContent toc={tableOfContents} />
         </TocWrapper>
-        <Article post={mdx!} />
+        <Article post={mdx as Mdx} />
       </PostWrapper>
     </>
   );

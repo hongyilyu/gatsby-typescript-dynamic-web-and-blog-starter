@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { linkHover, linkStyle } from './shared-style.util';
 import { inlineCode } from './inline-code.custom-element';
 
 export const StyledA = styled.a`
