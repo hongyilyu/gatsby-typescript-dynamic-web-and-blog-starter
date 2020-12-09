@@ -2,16 +2,16 @@ import React from 'react';
 import { Mdx } from 'src/graphql';
 import styled from 'styled-components';
 
-import { Typography } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 
-import Avatar from '../avatar.component';
-import DateViewer from '../date-viewer.component';
-import TagsList from '../tag-list.component';
+import EditList from '../edit-list.component';
+import Creater from '../creater.component';
 
 const SectionContainer = styled.div`
-  margin: 2em 0;
-  line-height: 25px;
-  padding: 0 1em;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
 
   a {
     text-decoration: none;
@@ -21,28 +21,26 @@ const SectionContainer = styled.div`
       text-decoration: underline;
     }
   }
-
-  @media (min-width: 780px) {
-    padding: 0 2em;
-  }
 `;
 
 const PreArticle: React.FC<{ post: Mdx }> = ({ post: { frontmatter } }) => {
   return (
     <SectionContainer>
-      <div>
-        <Typography>
-          <DateViewer date={frontmatter!.date} />
-        </Typography>
-        <Typography>
-          {`Created By `}
-          <Avatar name='LHY-iS-Learning' />
-        </Typography>
-
-        <TagsList tags={frontmatter!.tags as string[]} />
-      </div>
+      <Grid container direction='column' xs={4} spacing={1}>
+        <Creater />
+        <EditList />
+      </Grid>
     </SectionContainer>
   );
 };
 
 export default PreArticle;
+
+/*
+      <Typography>
+        <DateViewer date={frontmatter!.date} />
+      </Typography>
+      <Typography>{`Created By `}</Typography>
+
+      <TagsList tags={frontmatter!.tags as string[]} />
+*/
