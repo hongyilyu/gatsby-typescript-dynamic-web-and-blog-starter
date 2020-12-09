@@ -56,6 +56,15 @@ export const Toc = styled.aside`
     line-height: 1.25;
     margin-bottom: 0.25rem;
     margin-right: 1rem;
+
+    &.depth-2 {
+      &:first-of-type {
+        margin-top: 0.25rem;
+      }
+      margin-left: 2rem;
+      font-size: 0.8em;
+      list-style: none;
+    }
   }
 `;
 
@@ -71,6 +80,14 @@ const TableOfContent: React.FC<{ toc: any }> = ({ toc }) => {
                 <a href={i.url} key={i.url}>
                   {i.title}
                 </a>
+                {i.items &&
+                  i.items.map((ii: any) => (
+                    <li className={`depth-2`} key={ii.url}>
+                      <a href={ii.url} key={ii.url}>
+                        {`${ii.title}`}
+                      </a>
+                    </li>
+                  ))}
               </li>
             ))}
           </ul>

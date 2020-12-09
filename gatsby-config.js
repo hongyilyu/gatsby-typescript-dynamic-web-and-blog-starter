@@ -29,7 +29,14 @@ module.exports = {
       options: {
         extensions: [`.mdx`, `.md`],
         gatsbyRemarkPlugins: [
-          `gatsby-remark-autolink-headers`,
+          `gatsby-remark-smartypants`,
+          {
+            resolve: `gatsby-remark-autolink-headers`,
+            options: {
+              elements: [`h2`, `h3`, `h4`, `h5`, `h6`],
+            },
+          },
+
           {
             resolve: `gatsby-remark-images`,
             options: {
