@@ -1,8 +1,9 @@
 import { Grid } from '@material-ui/core';
 import React from 'react';
-import Avatar from './avatar.component';
+import { Mdx } from 'src/graphql';
+import Avatar from '../avatar.component';
 
-const Creater: React.FC = () => {
+const Creater: React.FC<{ mdx: Mdx }> = ({ mdx }) => {
   return (
     <Grid container spacing={1} xs={12} style={{ alignItems: 'center' }}>
       <Grid item xs={3}>
@@ -10,10 +11,10 @@ const Creater: React.FC = () => {
       </Grid>
       <Grid container direction='column' xs={9} spacing={0}>
         <Grid item xs={12}>
-          <p style={{ fontWeight: 'bold' }}>Hongyi Lyu</p>
+          <p style={{ fontWeight: 'bold' }}>{mdx.frontmatter!.author}</p>
         </Grid>
         <Grid item xs={12}>
-          <p>Jun 22, 8 min read</p>
+          <p>{`${mdx.frontmatter?.date} • ${mdx.timeToRead! * 2} min read`}</p>
         </Grid>
       </Grid>
     </Grid>

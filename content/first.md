@@ -1,21 +1,18 @@
 ---
 title: My First Post
+author: lhy-is-learning
 date: 2019-07-10
 slug: /my-first-post
 tags:
   - absdfac
   - def
-edit_by: lhy-is-learning
+edit_by:
+  - lhy-is-learning
 ---
 
-adfafdadsf
-asdfasdfasdf
-afgsdfgaf
-aasdfasdf
+## Markdown Cheatsheet
 
-# Markdown Cheatsheet<a name="TOP"></a>
-
-# Heading 1
+## Heading 1
 
     Markup :  # Heading 1 #
 
@@ -221,7 +218,7 @@ Foldable text:
 
 Link to a specific part of the page:
 
-[Go To TOP](#TOP)
+[Go To TOP](#markdown-cheatsheet)
 
     Markup : [text goes here](#section_name)
               section_title<a name="section_name"></a>
