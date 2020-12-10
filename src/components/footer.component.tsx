@@ -10,7 +10,10 @@ const FooterComponent: React.FC = () => {
   return (
     <FooterStyle>
       <Typography variant='body2' color='textPrimary' align='center'>
-        <Link color='inherit' href='https://github.com/LHY-iS-Learning/MoneyEstimateFrontend'>
+        <Link
+          color='inherit'
+          href='https://github.com/LHY-iS-Learning/gatsby-typescript-dynamic-web-and-blog-starter'
+        >
           <GitHubIcon />
         </Link>
       </Typography>

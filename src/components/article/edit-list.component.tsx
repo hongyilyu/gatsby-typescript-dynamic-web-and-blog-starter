@@ -1,9 +1,9 @@
 import { Avatar, Grid } from '@material-ui/core';
 import { AvatarGroup } from '@material-ui/lab';
 import React from 'react';
+import { USER_IMG_URL } from '../../utils/url.utils';
 
 const EditList: React.FC<{ editor: string[] | null }> = ({ editor }) => {
-  const link = 'https://github.com/' + name;
   return editor === null ? (
     <></>
   ) : (
@@ -18,7 +18,7 @@ const EditList: React.FC<{ editor: string[] | null }> = ({ editor }) => {
               style={{ width: '30px', height: '30px', marginTop: '5px' }}
               key={index}
               alt={name}
-              src={`https://github.com/${name}.png`}
+              src={USER_IMG_URL(name)}
             />
           ))}
         </AvatarGroup>
