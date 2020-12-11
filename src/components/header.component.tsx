@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import { DarkMode } from './dark-mode.component';
-import SearchBar from './search-bar.component';
+import Search from './search.component';
 import { Link } from '@reach/router';
 
 const TypographyWrapper = styled(Typography)`
@@ -14,6 +14,7 @@ const TypographyWrapper = styled(Typography)`
 
 const HeaderWrapper = styled(AppBar)`
   background-color: var(--mui-background-default);
+  z-index: 1500;
 `;
 
 const Header: React.FC = () => (
@@ -23,7 +24,7 @@ const Header: React.FC = () => (
         <TypographyWrapper noWrap>LHY-iS-Learning</TypographyWrapper>
       </Link>
       <div style={{ flexGrow: 1 }} />
-      <SearchBar />
+      <Search />
       <DarkMode />
     </Toolbar>
   </HeaderWrapper>

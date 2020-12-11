@@ -51,6 +51,31 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-plugin-lunr',
+      options: {
+        languages: [{ name: 'en' }],
+        fields: [
+          { name: 'title', store: true, attributes: { boost: 20 } },
+          { name: 'content' },
+          { name: 'url', store: true },
+          { name: 'author', store: true },
+          { name: 'editor', store: true },
+        ],
+        resolvers: {
+          Mdx: {
+            title: (node) => node.frontmatter.title,
+            content: (node) => node.rawBody,
+            url: (node) => node.fields.slug,
+            author: (node) => node.frontmatter.author,
+            editors: (node) => node.frontmatter.edit_by,
+          },
+        },
+        fetchOptions: {
+          credentials: 'same-origin',
+        },
+      },
+    },
+    {
       resolve: `gatsby-plugin-material-ui`,
       options: {
         stylesProvider: {
