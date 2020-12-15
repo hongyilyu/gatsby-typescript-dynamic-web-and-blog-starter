@@ -14,7 +14,7 @@ const Search: React.FC = () => {
         setSearchResults={setSearchResults}
         setBlur={setBlur}
       />
-      {searchQuery.length > 3 && !blur && (
+      {searchQuery.length > 2 && !blur && (
         <SearchDropdown searchResults={searchResults} />
       )}
     </div>

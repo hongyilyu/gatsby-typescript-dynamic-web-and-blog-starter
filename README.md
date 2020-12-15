@@ -11,3 +11,5 @@ gatsby new myapp https://github.com/LHY-iS-Learning/gatsby-typescript-dynamic-we
 - Portion of CSS copied from [@lmammino](https://github.com/lmammino) and his [repo](https://github.com/lmammino/loige.co)
 
 - Portion of CSS and JSX copied from [@spences10](https://github.com/spences10) and his [repo](https://github.com/spences10/scottspence.com)
+
+- Search Bar Text Location copied from [hpe-dev-portal](https://github.com/hpe-dev-incubator/hpe-dev-portal))

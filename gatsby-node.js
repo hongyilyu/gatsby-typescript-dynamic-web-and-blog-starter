@@ -6,6 +6,9 @@
 
 const { createFilePath } = require(`gatsby-source-filesystem`);
 const path = require(`path`);
+require('dotenv').config({
+  path: `.env`,
+});
 // You can delete this file if you're not using it
 // Implement the Gatsby API “onCreatePage”. This is
 // called after every page is created.
@@ -53,8 +56,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   // create page for each mdx file
   posts.forEach((post) => {
+    const postPath = `${process.env.GATSBY_WEB_PREFIX}/${process.env.GATSBY_POSTS_PREFIX}/${post.frontmatter.slug}`;
     createPage({
-      path: post.frontmatter.slug,
+      path: postPath,
       component: postTemplate,
       context: {
         slug: post.frontmatter.slug,

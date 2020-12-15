@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import InputBase from '@material-ui/core/InputBase';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
@@ -111,7 +111,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         onChange={(e) => {
           if (e.target.value) setSearchQuery(e.target.value);
         }}
-        onBlur={() => setBlur(true)}
+        onBlur={() => setTimeout(() => setBlur(true), 100)}
         onFocus={() => setBlur(false)}
       />
     </SearchWrapper>

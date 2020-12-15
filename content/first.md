@@ -2,7 +2,7 @@
 title: My First Post
 author: lhy-is-learning
 date: 2019-07-10
-slug: /my-first-post
+slug: my-first-post
 tags:
   - absdfac
   - def

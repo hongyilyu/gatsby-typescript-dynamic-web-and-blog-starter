@@ -79,7 +79,7 @@ const TableOfContent: React.FC<{ toc: any }> = ({ toc }) => {
         <TocWrapper>
           <Toc>
             <h3>Table of contents</h3>
-            <ul>
+            <ul key={`first-ul`}>
               {toc.items.map((i: any) => (
                 <li key={i.url}>
                   <a href={i.url} key={i.url}>
@@ -87,11 +87,13 @@ const TableOfContent: React.FC<{ toc: any }> = ({ toc }) => {
                   </a>
                   {i.items &&
                     i.items.map((ii: any) => (
-                      <li className={`depth-2`} key={ii.url}>
-                        <a href={ii.url} key={ii.url}>
-                          {`${ii.title}`}
-                        </a>
-                      </li>
+                      <ul key={`second-ul`}>
+                        <li className={`depth-2`} key={ii.url}>
+                          <a href={ii.url} key={ii.url}>
+                            {`${ii.title}`}
+                          </a>
+                        </li>
+                      </ul>
                     ))}
                 </li>
               ))}

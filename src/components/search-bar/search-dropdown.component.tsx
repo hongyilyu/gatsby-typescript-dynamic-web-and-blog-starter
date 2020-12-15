@@ -5,7 +5,6 @@ import SearchDropdownItem from './search-dropdown-item.component';
 const SearchDropdown: React.FC<{ searchResults: any[] }> = ({
   searchResults,
 }) => {
-  console.log(searchResults);
   return (
     <Paper
       style={{
