@@ -32,7 +32,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           frontmatter {
             slug
             tags
+            date(formatString: "MMM DD, YY")
+            author
+            edit_by
           }
+          rawBody
           fields {
             slug
           }

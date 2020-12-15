@@ -35,9 +35,9 @@ const useStyles = makeStyles((theme: Theme) =>
       // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
       transition: theme.transitions.create('width'),
-      width: '12ch',
+      width: '20ch',
       '&:focus': {
-        width: '20ch',
+        width: '400px',
       },
     },
   })
@@ -47,21 +47,50 @@ interface SearchBarProps {
   searchQuery: string;
   setSearchQuery: Function;
   setSearchResults: Function;
+  setBlur: Function;
+}
+
+declare global {
+  interface Window {
+    __LUNR__: any;
+  }
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
   searchQuery,
   setSearchQuery,
   setSearchResults,
+  setBlur,
 }) => {
   const { value } = useDarkMode();
   const classes = useStyles();
+  const getPositions = (searchResult: any, field: any) => {
+    let positions: any[] = [];
+    if (searchResult.matchData && searchResult.matchData.metadata) {
+      const data = searchResult.matchData.metadata;
+      Object.keys(data).forEach((searchTerm) => {
+        if (data[searchTerm][field] && data[searchTerm][field].position) {
+          positions = positions.concat(data[searchTerm][field].position);
+        }
+      });
+    }
+    return positions;
+  };
+
   const search = (searchQuery: string) => {
     if (searchQuery.length < 3 || !window.__LUNR__) return [];
     const results = window.__LUNR__.en.index.search(searchQuery);
-    const posts = results.map(({ ref }: any) => window.__LUNR__.en.store[ref]);
-    setSearchResults(posts);
-    return posts;
+
+    const searchResults = results.map((searchResult: any) => {
+      const doc = window.__LUNR__.en.store[searchResult.ref];
+      return {
+        titlePos: getPositions(searchResult, 'title'),
+        bodyPos: getPositions(searchResult, 'content'),
+        ...doc,
+      };
+    });
+    setSearchResults(searchResults);
+    return searchResults;
   };
   useEffect(() => {
     search(searchQuery);
@@ -82,6 +111,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
         onChange={(e) => {
           if (e.target.value) setSearchQuery(e.target.value);
         }}
+        onBlur={() => setBlur(true)}
+        onFocus={() => setBlur(false)}
       />
     </SearchWrapper>
   );

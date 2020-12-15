@@ -9,7 +9,8 @@ import VerticalTicketRip from '@mui-treasury/components/rip/verticalTicket';
 //@ts-ignore
 import { useVerticalRipStyles } from '@mui-treasury/styles/rip/vertical';
 import { Link } from '@reach/router';
-import { USER_IMG_URL } from '../utils/url.utils';
+import { USER_IMG_URL } from '../../utils/url.utils';
+import HighlightedText from './highlighted-text.component';
 
 const mainColor = '#003399';
 const lightColor = '#ecf2ff';
@@ -20,7 +21,7 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
     overflow: 'visible',
     background: 'none',
     display: 'flex',
-    minWidth: 343,
+    width: 456,
     minHeight: 150,
     filter: 'drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.3))',
     '& $moveLeft, $moveRight': {
@@ -103,8 +104,22 @@ const ResultInfo = React.memo(function PlaneTicketCard({ result }: any) {
       />
       <div className={cx(styles.right, styles.moveRight)}>
         <div className={styles.label}>
-          <h2 className={styles.heading}>BEK</h2>
-          <p className={styles.subheader}>Beijing China</p>
+          <HighlightedText
+            style={{
+              font: 'inherit',
+              fontWeight: 'bold',
+            }}
+            content={result.title}
+            positions={result.titlePos}
+            maxLength={50}
+          />
+          <HighlightedText
+            className={styles.subheader}
+            content={result.content}
+            positions={result.bodyPos}
+            isMarkdown={false}
+            maxLength={50}
+          />
         </div>
       </div>
     </Card>
@@ -113,9 +128,16 @@ const ResultInfo = React.memo(function PlaneTicketCard({ result }: any) {
 
 const SearchDropdownItem: React.FC<{ result: any }> = ({ result }) => {
   return (
-    <a href={result.url}>
+    <Link
+      to={result.url}
+      style={{
+        textDecoration: 'none',
+        display: 'inline-block',
+        margin: '2px 0',
+      }}
+    >
       <ResultInfo result={result} />
-    </a>
+    </Link>
   );
 };
 

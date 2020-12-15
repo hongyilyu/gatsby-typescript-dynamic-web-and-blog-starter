@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import { DarkMode } from './dark-mode.component';
-import Search from './search.component';
+import { Search } from './search-bar';
 import { Link } from '@reach/router';
 
 const TypographyWrapper = styled(Typography)`

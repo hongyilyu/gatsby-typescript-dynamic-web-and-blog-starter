@@ -1,3 +1,23 @@
+const remark = require('remark');
+const strip = require('strip-markdown');
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
+const lunrHighlightPlugin = () => (builder) => {
+  builder.metadataWhitelist.push('position');
+};
+
+const stripMarkdown = (markdown) => {
+  let text = markdown;
+  remark()
+    .use(strip)
+    .process(markdown, (err, file) => {
+      text = file.contents;
+    });
+  return text;
+};
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
@@ -53,18 +73,19 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-lunr',
       options: {
-        languages: [{ name: 'en' }],
+        languages: [{ name: 'en', plugins: [lunrHighlightPlugin] }],
         fields: [
           { name: 'title', store: true, attributes: { boost: 20 } },
-          { name: 'content' },
+          { name: 'content', store: true },
           { name: 'url', store: true },
           { name: 'author', store: true },
           { name: 'editor', store: true },
         ],
+        filterNodes: (node) => !!node.frontmatter,
         resolvers: {
           Mdx: {
             title: (node) => node.frontmatter.title,
-            content: (node) => node.rawBody,
+            content: (node) => stripMarkdown(node.rawBody),
             url: (node) => node.fields.slug,
             author: (node) => node.frontmatter.author,
             editors: (node) => node.frontmatter.edit_by,
