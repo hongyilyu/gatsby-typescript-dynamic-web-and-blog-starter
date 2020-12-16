@@ -17,7 +17,6 @@ import {
   P,
   Table,
 } from '../components/custom-element';
-import { GlobalStyle } from './global-style';
 
 const { preToCodeBlock } = require('mdx-utils');
 const components = {
@@ -46,10 +45,9 @@ const components = {
 
 const BlogWrapper: React.FC = ({ children }) => {
   return (
-    <>
-      <GlobalStyle />
+    <main style={{ position: 'relative' }}>
       <MDXProvider components={components}>{children}</MDXProvider>
-    </>
+    </main>
   );
 };
 

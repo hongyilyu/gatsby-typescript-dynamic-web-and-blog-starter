@@ -2,26 +2,14 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
-import {
-  getCollapseBtn,
-  getContent,
-  getDrawerSidebar,
-  getSidebarContent,
-  getSidebarTrigger,
-  getStandardScheme,
-  Root,
-} from '@mui-treasury/layout';
-//@ts-ignore
-import { NavContentMockUp, NavHeaderMockUp } from '@mui-treasury/mockup/layout';
+import { getContent, getStandardScheme, Root } from '@mui-treasury/layout';
 import { RouteComponentProps } from '@reach/router';
 
 import Footer from '../components/footer.component';
 import Header from '../components/header.component';
+import SideBar from '../components/side-bar/side-bar.component';
+import { GlobalStyle } from './global-style';
 
-const DrawerSidebar = getDrawerSidebar(styled);
-const SidebarTrigger = getSidebarTrigger(styled);
-const SidebarContent = getSidebarContent(styled);
-const CollapseBtn = getCollapseBtn(styled);
 const Content = getContent(styled);
 
 const scheme = getStandardScheme();
@@ -56,16 +44,9 @@ const Dashboard: React.FC<DashboardProps> = ({ results = 2 }) => {
       {({ state: { sidebar } }) => (
         <>
           <CssBaseline />
-          <Header>
-            <SidebarTrigger sidebarId='unique_id' />
-          </Header>
-          <DrawerSidebar sidebarId='unique_id'>
-            <SidebarContent>
-              <NavHeaderMockUp collapsed={sidebar.unique_id.collapsed} />
-              <NavContentMockUp />
-            </SidebarContent>
-            <CollapseBtn />
-          </DrawerSidebar>
+          <GlobalStyle />
+          <Header />
+          <SideBar sidebar={sidebar} />
           <Content>
             <div>
               <pre>{JSON.stringify(person, null, 2)}</pre>
