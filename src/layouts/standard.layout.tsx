@@ -2,26 +2,20 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Toolbar from '@material-ui/core/Toolbar';
 import {
   getCollapseBtn,
   getContent,
   getDrawerSidebar,
-  getFooter,
-  getHeader,
   getSidebarContent,
   getSidebarTrigger,
   getStandardScheme,
   Root,
 } from '@mui-treasury/layout';
-import {
-  FooterMockUp,
-  HeaderMockUp,
-  NavContentMockUp,
-  NavHeaderMockUp,
-} from '@mui-treasury/mockup/layout';
+//@ts-ignore
+import { NavContentMockUp, NavHeaderMockUp } from '@mui-treasury/mockup/layout';
 import { RouteComponentProps } from '@reach/router';
 
+import Footer from '../components/footer.component';
 import Header from '../components/header.component';
 
 const DrawerSidebar = getDrawerSidebar(styled);
@@ -29,7 +23,6 @@ const SidebarTrigger = getSidebarTrigger(styled);
 const SidebarContent = getSidebarContent(styled);
 const CollapseBtn = getCollapseBtn(styled);
 const Content = getContent(styled);
-const Footer = getFooter(styled);
 
 const scheme = getStandardScheme();
 
@@ -78,9 +71,7 @@ const Dashboard: React.FC<DashboardProps> = ({ results = 2 }) => {
               <pre>{JSON.stringify(person, null, 2)}</pre>
             </div>
           </Content>
-          <Footer>
-            <FooterMockUp />
-          </Footer>
+          <Footer />
         </>
       )}
     </Root>

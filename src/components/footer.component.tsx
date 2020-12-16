@@ -6,7 +6,8 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import { getFooter } from '@mui-treasury/layout';
 
 const FooterStyle = getFooter(styled);
-const FooterComponent: React.FC = () => {
+
+const Footer: React.FC = () => {
   return (
     <FooterStyle>
       <Typography variant='body2' color='textPrimary' align='center'>
@@ -27,4 +28,4 @@ const FooterComponent: React.FC = () => {
   );
 };
 
-export default FooterComponent;
+export default Footer;

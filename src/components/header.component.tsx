@@ -15,6 +15,7 @@ const TypographyWrapper = styled(Typography)`
 const HeaderWrapper = styled(AppBar)`
   background-color: var(--mui-background-default);
   z-index: 1500;
+  position: sticky;
 `;
 
 const Header: React.FC = () => (
