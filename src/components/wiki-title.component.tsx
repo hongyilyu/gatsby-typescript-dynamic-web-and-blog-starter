@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 //@ts-ignore
-import defaultBg from '../images/cu-bg.jpg';
+import defaultBg from '../images/bg.jpg';
 
 const WikiContainer = styled.div`
   background-color: #46c9e5;

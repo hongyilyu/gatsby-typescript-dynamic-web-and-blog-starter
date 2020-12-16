@@ -34,6 +34,7 @@ export const GlobalStyle = createGlobalStyle`
     min-height: 100%;
     line-height: 1.625;
     letter-spacing: 0.025em;
+    overflow-x: hidden;
     background: var(
       --colour-background,
       #f7fafc

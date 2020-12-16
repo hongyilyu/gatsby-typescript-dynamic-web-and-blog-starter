@@ -1,6 +1,7 @@
 ---
 title: My First Post
 author: lhy-is-learning
+description: Markdown Cheatsheet and MDX style showcase
 date: 2019-07-10
 slug: my-first-post
 tags:

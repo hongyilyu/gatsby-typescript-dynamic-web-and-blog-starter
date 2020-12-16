@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, graphql, PageProps } from 'gatsby';
 
 import Layout from '../layouts/wiki.layout';
-import SEO from '../components/SEO';
 
 interface DataProps {
   site: {
@@ -12,10 +11,8 @@ interface DataProps {
   };
 }
 const IndexPage: React.FC<PageProps<DataProps>> = ({ data, path }) => {
-  const title = data.site.siteMetadata.title;
   return (
     <Layout>
-      <SEO title='Home' />
       <h1>Hi people</h1>
       <p>Welcome to your new Gatsby site.</p>
       <p>Now go build something great.</p>

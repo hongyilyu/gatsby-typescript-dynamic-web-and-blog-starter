@@ -6,6 +6,7 @@ import TableOfContent from '../components/table-of-content.component';
 import { Mdx, PostsBySlugQuery } from 'src/graphql';
 import { Grid } from '@material-ui/core';
 import WikiLayout from '../layouts/wiki.layout';
+import SEO from '../components/SEO.component';
 
 const BlogPostTemplate: React.FC<PageProps<PostsBySlugQuery>> = ({
   data: { mdx },
@@ -13,6 +14,7 @@ const BlogPostTemplate: React.FC<PageProps<PostsBySlugQuery>> = ({
   const { frontmatter, tableOfContents } = mdx!;
   return (
     <WikiLayout>
+      <SEO frontmatter={frontmatter!} />
       <WikiTitle>
         <h1>
           <span>{frontmatter!.title}</span>
@@ -40,6 +42,7 @@ export const query = graphql`
       frontmatter {
         title
         date(formatString: "MMM DD, YY")
+        description
         tags
         author
         edit_by
