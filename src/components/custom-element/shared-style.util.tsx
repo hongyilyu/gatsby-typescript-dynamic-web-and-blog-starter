@@ -1,3 +1,4 @@
+import { Link } from 'gatsby';
 import { down } from 'styled-breakpoints';
 import styled, { css } from 'styled-components';
 
@@ -46,5 +47,42 @@ export const negMargin = css`
   ${down('sm')} {
     margin-left: -0;
     margin-right: -0;
+  }
+`;
+
+export const LinkContainer = styled(Link)`
+  background-color: rgba(187, 239, 253, 0.3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    background-color: #bbeffd;
+    border-bottom-color: #1a1a1a;
+  }
+
+  &.anchor,
+  &.gatsby-resp-image-link {
+    background-color: transparent;
+    border: none;
+  }
+
+  &.anchor.before {
+    position: absolute;
+    top: 64px;
+    left: -1em;
+  }
+`;
+
+// ICON style={{ margin: '0 0.25em 0 0' }}
+export const IconSpaceStringSpanContainer = styled.span`
+  vertical-align: middle;
+  font-size: inherit;
+  margin: 0 0.5em;
+  margin-left: 0;
+  display: inline-block;
+
+  span {
+    vertical-align: text-bottom;
   }
 `;

@@ -6,13 +6,22 @@ import { Container, Grid } from '@material-ui/core';
 
 import EditList from './edit-list.component';
 import Creater from './creater.component';
-import TagList from '../tag-list.component';
+import TagList, { TagStyle } from '../tag-list.component';
 
 const SectionContainer = styled.div`
   margin-top: 10px;
   display: flex;
   align-items: center;
   flex-grow: 1;
+`;
+
+const TagsContainer = styled.span`
+  vertical-align: middle;
+  display: inline-block;
+
+  & > * {
+    margin: 8px;
+  }
 `;
 
 const PreArticle: React.FC<{ mdx: Mdx }> = ({ mdx }) => {
@@ -28,7 +37,14 @@ const PreArticle: React.FC<{ mdx: Mdx }> = ({ mdx }) => {
         <Grid item style={{ height: '56px' }}>
           {' '}
         </Grid>
-        <TagList tags={mdx.frontmatter!.tags as string[]} />
+        <Grid container spacing={1} xs={12} style={{ alignItems: 'center' }}>
+          <TagsContainer>
+            <TagList
+              tags={mdx.frontmatter!.tags as string[]}
+              tagStyle={TagStyle.CHIP}
+            />
+          </TagsContainer>
+        </Grid>
       </Grid>
     </SectionContainer>
   );

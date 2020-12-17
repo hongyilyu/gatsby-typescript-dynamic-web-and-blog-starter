@@ -1,25 +1,41 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Grid } from '@material-ui/core';
-import Tag from './tag.component';
+import TagChip from './tag-chip.component';
+import TagHashTag from './tag-hashtag.component';
 
-const TagsContainer = styled.span`
-  vertical-align: middle;
-  display: inline-block;
+export enum TagStyle {
+  CHIP = 'Chip',
+  HASHTAG = 'Hashtag',
+}
 
-  & > * {
-    margin: 8px;
+export interface TagProps {
+  name: string;
+  href?: string;
+  last?: boolean;
+}
+
+const mySwitchStatement = (tagStyle: TagStyle): React.FC<TagProps> => {
+  switch (tagStyle) {
+    case TagStyle.CHIP:
+      return TagChip;
+    case TagStyle.HASHTAG:
+      return TagHashTag;
+    default:
+      return TagHashTag;
   }
-`;
+};
 
-const TagList: React.FC<{ tags: string[] }> = ({ tags }) => (
-  <Grid container spacing={1} xs={12} style={{ alignItems: 'center' }}>
-    <TagsContainer>
+const TagList: React.FC<{ tags: string[]; tagStyle: TagStyle }> = ({
+  tags,
+  tagStyle,
+}) => {
+  const Tag = mySwitchStatement(tagStyle);
+  return (
+    <>
       {tags.map((tag, i) => {
-        return <Tag name={tag} key={tag} />;
+        return <Tag name={tag} key={tag} last={i === tags.length - 1} />;
       })}
-    </TagsContainer>
-  </Grid>
-);
+    </>
+  );
+};
 
 export default TagList;

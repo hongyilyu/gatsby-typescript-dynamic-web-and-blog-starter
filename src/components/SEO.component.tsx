@@ -13,10 +13,11 @@ import { MdxFrontmatter } from 'src/graphql';
 import defaultLogo from '../images/hongyi.jpg';
 
 interface Props {
-  frontmatter: MdxFrontmatter;
+  title?: string;
+  description?: string;
 }
 
-const SEO: React.FC<Props> = ({ frontmatter }) => {
+const SEO: React.FC<Props> = ({ title, description }) => {
   const {
     site: { siteMetadata },
   } = useStaticQuery(
@@ -39,9 +40,9 @@ const SEO: React.FC<Props> = ({ frontmatter }) => {
 
   return (
     <Seo
-      title={frontmatter.title || 'empty'}
+      title={title || 'empty'}
       titleTemplate={siteMetadata.title}
-      description={frontmatter.description || 'nothing'}
+      description={description || 'nothing'}
       image={`${defaultLogo}`}
       pathname={``}
       twitterUsername={siteMetadata.twitterName}

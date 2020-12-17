@@ -14,7 +14,7 @@ const BlogPostTemplate: React.FC<PageProps<PostsBySlugQuery>> = ({
   const { frontmatter, tableOfContents } = mdx!;
   return (
     <WikiLayout>
-      <SEO frontmatter={frontmatter!} />
+      <SEO title={frontmatter?.title} description={frontmatter?.description!} />
       <WikiTitle>
         <h1>
           <span>{frontmatter!.title}</span>

@@ -25,6 +25,41 @@ exports.onCreatePage = async ({ page, actions }) => {
   }
 };
 
+const createTagPage = (createPage, posts) => {
+  const tagTemplate = path.resolve(`src/templates/blog-tags.template.tsx`);
+
+  const postsByTag = {};
+
+  posts.forEach((post) => {
+    const {
+      frontmatter: { tags },
+    } = post;
+    if (tags) {
+      tags.forEach((tag) => {
+        if (!postsByTag[tag]) {
+          postsByTag[tag] = [];
+        }
+        postsByTag[tag].push(post);
+      });
+    }
+  });
+
+  const tags = Object.keys(postsByTag);
+
+  tags.forEach((tag) => {
+    const posts = postsByTag[tag];
+
+    createPage({
+      path: `${process.env.GATSBY_WEB_PREFIX}/${process.env.GATSBY_POSTS_PREFIX}/tags/${tag}`,
+      component: tagTemplate,
+      context: {
+        posts,
+        tag,
+      },
+    });
+  });
+};
+
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
   const postTemplate = path.resolve('src/templates/blog-post.template.tsx');
@@ -38,7 +73,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             date(formatString: "MMM DD, YY")
             author
             edit_by
+            title
           }
+          excerpt(pruneLength: 512)
+          timeToRead
           rawBody
           fields {
             slug
@@ -54,6 +92,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const posts = result.data.allMdx.nodes;
 
+  createTagPage(createPage, posts);
   // create page for each mdx file
   posts.forEach((post) => {
     const postPath = `${process.env.GATSBY_WEB_PREFIX}/${process.env.GATSBY_POSTS_PREFIX}/${post.frontmatter.slug}`;

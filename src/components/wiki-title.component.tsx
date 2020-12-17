@@ -87,14 +87,19 @@ const WikiContent = styled.div`
 
 interface WikiTitleProps {
   backgroundImg?: string;
+  className?: string;
 }
 
-const WikiTitle: React.FC<WikiTitleProps> = ({ children, backgroundImg }) => {
+const WikiTitle: React.FC<WikiTitleProps> = ({
+  children,
+  backgroundImg,
+  className,
+}) => {
   const backgroundImage = backgroundImg || defaultBg;
 
   return (
     <WikiContainer
-      className='bottomRightBg'
+      className={`bottomRightBg ${className}`}
       style={{
         backgroundImage: `url(${backgroundImage})`,
       }}
