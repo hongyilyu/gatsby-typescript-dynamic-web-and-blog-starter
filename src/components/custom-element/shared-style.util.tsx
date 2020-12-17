@@ -86,3 +86,11 @@ export const IconSpaceStringSpanContainer = styled.span`
     vertical-align: text-bottom;
   }
 `;
+
+export const VerticalCenter = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const BottomFooter = `calc(100vh - 50px - 60px)`;

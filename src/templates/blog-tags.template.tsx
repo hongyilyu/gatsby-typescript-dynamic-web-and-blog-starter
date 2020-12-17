@@ -7,11 +7,17 @@ import WikiLayout from '../layouts/wiki.layout';
 import SEO from '../components/SEO.component';
 import tagsBg from '../images/tags-bg.png';
 import ArticlePreview from '../components/article/article-preview.component';
+import { VerticalCenter } from '../components/custom-element/shared-style.util';
+import styled from 'styled-components';
 
 interface TagsPageContextType {
   tag: string;
   posts: Mdx[];
 }
+
+const VerticalCenterContainer = styled.div`
+  ${VerticalCenter}
+`;
 
 const BlogTagsTemplate: React.FC<PageProps> = ({ pageContext }) => {
   const { tag, posts } = pageContext as TagsPageContextType;
@@ -33,9 +39,11 @@ const BlogTagsTemplate: React.FC<PageProps> = ({ pageContext }) => {
       <Grid container justify='center' spacing={2}>
         <Grid item xs></Grid>
         <Grid item xs={6}>
-          {posts.map((post) => (
-            <ArticlePreview post={post} />
-          ))}
+          <VerticalCenterContainer>
+            {posts.map((post) => (
+              <ArticlePreview post={post} />
+            ))}
+          </VerticalCenterContainer>
         </Grid>
         <Grid item xs></Grid>
       </Grid>

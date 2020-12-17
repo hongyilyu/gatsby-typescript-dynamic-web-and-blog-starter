@@ -17,6 +17,7 @@ import {
   P,
   Table,
 } from '../components/custom-element';
+import { BottomFooter } from '../components/custom-element/shared-style.util';
 
 const { preToCodeBlock } = require('mdx-utils');
 const components = {
@@ -45,7 +46,7 @@ const components = {
 
 const BlogWrapper: React.FC = ({ children }) => {
   return (
-    <main style={{ position: 'relative' }}>
+    <main style={{ position: 'relative', minHeight: `${BottomFooter}` }}>
       <MDXProvider components={components}>{children}</MDXProvider>
     </main>
   );

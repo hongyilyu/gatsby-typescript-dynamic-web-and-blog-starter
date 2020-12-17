@@ -9,6 +9,7 @@ import Footer from '../components/footer.component';
 import Header from '../components/header.component';
 import SideBar from '../components/side-bar/side-bar.component';
 import { GlobalStyle } from './global-style';
+import { BottomFooter } from '../components/custom-element/shared-style.util';
 
 const Content = getContent(styled);
 
@@ -46,12 +47,14 @@ const Dashboard: React.FC<DashboardProps> = ({ results = 2 }) => {
           <CssBaseline />
           <GlobalStyle />
           <Header />
-          <SideBar sidebar={sidebar} />
-          <Content>
-            <div>
-              <pre>{JSON.stringify(person, null, 2)}</pre>
-            </div>
-          </Content>
+          <div style={{ minHeight: `${BottomFooter}` }}>
+            <SideBar sidebar={sidebar} />
+            <Content>
+              <div>
+                <pre>{JSON.stringify(person, null, 2)}</pre>
+              </div>
+            </Content>
+          </div>
           <Footer />
         </>
       )}

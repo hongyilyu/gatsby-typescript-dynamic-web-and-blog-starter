@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { POSTS_URL_PREFIX, USER_IMG_URL } from '../../utils/url.utils';
-import TagList, { TagStyle } from '../tag-list.component';
+
+import { Grid } from '@material-ui/core';
+import LoyaltyIcon from '@material-ui/icons/Loyalty';
+import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye';
+
 import { Mdx } from '../../graphql';
 import { USER_NAME } from '../../utils/string.utils';
+import { POSTS_URL_PREFIX, USER_IMG_URL } from '../../utils/url.utils';
 import {
-  LinkContainer,
   IconSpaceStringSpanContainer,
+  LinkContainer,
 } from '../custom-element/shared-style.util';
-import { Grid, Paper } from '@material-ui/core';
 import DateViewer from '../date-viewer.component';
-import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye';
-import LoyaltyIcon from '@material-ui/icons/Loyalty';
+import TagList, { TagStyle } from '../tag-list.component';
 
 const Post = styled.article`
   margin: 2rem 0 1rem;
   max-width: 820px;
 
   &:first-of-type {
-    margin-top: 0;
+    margin-top: 20;
   }
 
   position: relative;
