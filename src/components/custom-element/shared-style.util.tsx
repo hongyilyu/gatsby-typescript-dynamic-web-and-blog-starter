@@ -93,4 +93,4 @@ export const VerticalCenter = css`
   align-items: center;
 `;
 
-export const BottomFooter = `calc(100vh - 50px - 60px)`;
+export const BottomFooter = `calc(100vh - 55px - 65px)`;

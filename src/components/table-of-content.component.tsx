@@ -7,6 +7,7 @@ import {
   linkStyle,
 } from './custom-element/shared-style.util';
 import reset from 'styled-reset';
+import { Link } from 'gatsby';
 
 const TocWrapper = styled.div`
   position: absolute;
@@ -82,16 +83,21 @@ const TableOfContent: React.FC<{ toc: any }> = ({ toc }) => {
             <ul key={`first-ul`}>
               {toc.items.map((i: any) => (
                 <li key={i.url}>
-                  <a href={i.url} key={i.url}>
+                  <Link to={i.url} id={i.url} key={i.url} target='_self'>
                     {i.title}
-                  </a>
+                  </Link>
                   {i.items &&
                     i.items.map((ii: any) => (
                       <ul key={`second-ul`}>
                         <li className={`depth-2`} key={ii.url}>
-                          <a href={ii.url} key={ii.url}>
+                          <Link
+                            to={ii.url}
+                            id={ii.url}
+                            key={ii.url}
+                            target='_self'
+                          >
                             {`${ii.title}`}
-                          </a>
+                          </Link>
                         </li>
                       </ul>
                     ))}
