@@ -16,6 +16,7 @@ import {
   Ol,
   P,
   Table,
+  Ul,
 } from '../components/custom-element';
 import { BottomFooter } from '../components/custom-element/shared-style.util';
 
@@ -42,6 +43,7 @@ const components = {
   li: (props: any) => <Li {...props} />,
   p: (props: any) => <P {...props} />,
   ol: (props: any) => <Ol {...props} />,
+  ul: (props: any) => <Ul {...props} />,
 };
 
 const BlogWrapper: React.FC = ({ children }) => {

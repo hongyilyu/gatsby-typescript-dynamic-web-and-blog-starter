@@ -9,5 +9,6 @@ export { Blockquote } from './blockquote.custom-element';
 export { Table } from './table.custom-element';
 export { Li } from './li.custom-element';
 export { Ol } from './ol.custom-element';
+export { Ul } from './ul.custom-element';
 export { P } from './p.custom-element';
 export { Code } from './code.custom-element';

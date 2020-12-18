@@ -8,7 +8,7 @@ const Wrapper = styled.div`
     margin-top: 20px;
     padding-left: 2em;
     li {
-      list-style-type: decimal;
+      list-style: disc;
       margin-top: 10px;
     }
   }
@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   }
 `;
 
-export const Ol = (props: any) => {
+export const Ul = (props: any) => {
   return (
     <Wrapper>
       <ul {...props}>{props.children}</ul>
