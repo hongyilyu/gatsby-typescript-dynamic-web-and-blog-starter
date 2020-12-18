@@ -44,7 +44,7 @@ const createTagPage = (createPage, posts) => {
     }
   });
 
-  Object.entries(([tag, tagPosts]) => {
+  Object.entries(postsByTag).map(([tag, tagPosts]) => {
     createPage({
       path: `${process.env.GATSBY_WEB_PREFIX}/${process.env.GATSBY_POSTS_PREFIX}/tags/${tag}`,
       component: tagTemplate,
