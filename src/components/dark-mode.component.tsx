@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import useDarkMode from 'use-dark-mode';
 import Brightness4OutlinedIcon from '@material-ui/icons/Brightness4Outlined';
 import Brightness7Icon from '@material-ui/icons/Brightness7';

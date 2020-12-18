@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { Grid } from '@material-ui/core';
+import { Grid, Avatar } from '@material-ui/core';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye';
 
 import { Mdx } from '../../graphql';
 import { USER_NAME } from '../../utils/string.utils';
 import { POSTS_URL_PREFIX, USER_IMG_URL } from '../../utils/url.utils';
-import {
-  IconSpaceStringSpanContainer,
-  LinkContainer,
-} from '../custom-element/shared-style.util';
-import DateViewer from '../date-viewer.component';
+import { LinkContainer } from '../custom-element/shared-style.util';
 import TagList, { TagStyle } from '../tag-list.component';
-
+import useIconSpace from '../../hooks/use-icon-string.hook';
+import EventIcon from '@material-ui/icons/Event';
 const Post = styled.article`
   margin: 2rem 0 1rem;
   max-width: 820px;
@@ -25,6 +22,7 @@ const Post = styled.article`
 
   position: relative;
   margin: 4rem 0;
+  margin-bottom: 1rem;
   padding-bottom: 4rem;
   border-bottom: #ebf2f6 1px solid;
   word-wrap: break-word;
@@ -132,28 +130,32 @@ const ArticlePreview: React.FC<{ post: Mdx }> = ({
       </section>
       <Grid container spacing={0}>
         <Grid item xs={3}>
-          <ProfilePic
-            src={USER_IMG_URL(author!)}
-            alt={`${author}'s Profile picture`}
-          />
-          <LinkContainer to='/about'>{authorName}</LinkContainer>
+          {useIconSpace(
+            <Avatar
+              src={USER_IMG_URL(author!)}
+              alt={`${author}'s Profile picture`}
+              style={{
+                width: '24px',
+                height: '24px',
+                float: 'left',
+                marginRight: '9px',
+                borderRadius: '100%',
+              }}
+            />,
+            <LinkContainer to='/about'>{authorName}</LinkContainer>
+          )}
         </Grid>
         <Grid item xs={2}>
-          <DateViewer date={date} />
+          {useIconSpace(<EventIcon />, date)}
         </Grid>
         <Grid item xs={2}>
-          <IconSpaceStringSpanContainer>
-            <RemoveRedEyeIcon style={{ margin: '0 0.25em 0 0' }} />
-            <span>{`${2 * timeToRead!} min`}</span>
-          </IconSpaceStringSpanContainer>
+          {useIconSpace(<RemoveRedEyeIcon />, `${2 * timeToRead!} min`)}
         </Grid>
         <Grid item xs={5}>
-          <IconSpaceStringSpanContainer>
-            <LoyaltyIcon style={{ margin: '0 0.25em 0 0' }} />
-            <span>
-              <TagList tags={tags as string[]} tagStyle={TagStyle.HASHTAG} />
-            </span>
-          </IconSpaceStringSpanContainer>
+          {useIconSpace(
+            <LoyaltyIcon />,
+            <TagList tags={tags as string[]} tagStyle={TagStyle.HASHTAG} />
+          )}
         </Grid>
         <Grid item xs={12}></Grid>
       </Grid>

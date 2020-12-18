@@ -1,34 +1,36 @@
 import React from 'react';
 import { PageProps } from 'gatsby';
 import WikiTitle from '../components/wiki-title.component';
-import { Mdx } from 'src/graphql';
 import { Grid } from '@material-ui/core';
 import WikiLayout from '../layouts/wiki.layout';
 import SEO from '../components/SEO.component';
-import tagsBg from '../images/tags-bg.png';
-import ArticlePreview from '../components/article/article-preview.component';
 import { VerticalCenterContainer } from '../components/custom-element/shared-style.util';
+import ArticlePreview from '../components/article/article-preview.component';
+import Pagination, {
+  PaginationLabel,
+} from '../components/pagination.component';
+import { Mdx } from '../graphql';
 
-interface TagsPageContextType {
-  tag: string;
+interface PageContext {
   posts: Mdx[];
+  next: PaginationLabel;
+  previous: PaginationLabel;
+  currentPage: number;
+  totalPages: number;
 }
 
-const BlogTagsTemplate: React.FC<PageProps> = ({ pageContext }) => {
-  const { tag, posts } = pageContext as TagsPageContextType;
-  const title = `Posts about #${tag}`;
+const PostsPaginationTemplate: React.FC<PageProps> = ({ pageContext }) => {
+  const {
+    posts,
+    currentPage,
+    totalPages,
+    ...rest
+  } = pageContext as PageContext;
   return (
     <WikiLayout>
-      <SEO title={title} description={`Posts published under #${tag}`} />
-      <WikiTitle
-        backgroundImg={tagsBg}
-        className='small tiledBg gradientOverlay'
-      >
-        <h1>#{tag}</h1>
-        <h2>
-          {posts.length} post
-          {posts.length > 1 ? 's' : ''} in this collection
-        </h2>
+      <SEO title={'LHY iS Learning'} description={`All Posts`} />
+      <WikiTitle>
+        <h1>LHY iS Learning</h1>
       </WikiTitle>
 
       <Grid container justify='center' spacing={2}>
@@ -38,6 +40,10 @@ const BlogTagsTemplate: React.FC<PageProps> = ({ pageContext }) => {
             {posts.map((post) => (
               <ArticlePreview post={post} />
             ))}
+            <Pagination
+              {...rest}
+              middleText={`Page ${currentPage} of ${totalPages}`}
+            />
           </VerticalCenterContainer>
         </Grid>
         <Grid item xs></Grid>
@@ -46,4 +52,4 @@ const BlogTagsTemplate: React.FC<PageProps> = ({ pageContext }) => {
   );
 };
 
-export default BlogTagsTemplate;
+export default PostsPaginationTemplate;

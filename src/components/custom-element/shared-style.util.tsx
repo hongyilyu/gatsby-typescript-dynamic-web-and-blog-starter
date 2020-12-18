@@ -87,7 +87,7 @@ export const IconSpaceStringSpanContainer = styled.span`
   }
 `;
 
-export const VerticalCenter = css`
+export const VerticalCenterContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

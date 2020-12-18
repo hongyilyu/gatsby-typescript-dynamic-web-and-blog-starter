@@ -30,12 +30,12 @@ const createTagPage = (createPage, posts) => {
 
   const postsByTag = {};
 
-  posts.forEach((post) => {
+  posts.map((post) => {
     const {
       frontmatter: { tags },
     } = post;
     if (tags) {
-      tags.forEach((tag) => {
+      tags.map((tag) => {
         if (!postsByTag[tag]) {
           postsByTag[tag] = [];
         }
@@ -44,17 +44,58 @@ const createTagPage = (createPage, posts) => {
     }
   });
 
-  const tags = Object.keys(postsByTag);
-
-  tags.forEach((tag) => {
-    const posts = postsByTag[tag];
-
+  Object.entries(([tag, tagPosts]) => {
     createPage({
       path: `${process.env.GATSBY_WEB_PREFIX}/${process.env.GATSBY_POSTS_PREFIX}/tags/${tag}`,
       component: tagTemplate,
       context: {
-        posts,
+        posts: tagPosts,
         tag,
+      },
+    });
+  });
+};
+
+const createPostPaginationPage = (createPage, posts) => {
+  const postsPaginationTemplate = path.resolve(
+    `src/templates/posts-pagination.template.tsx`
+  );
+
+  const postsByPage = {};
+
+  posts.map((post, index) => {
+    const currentPage =
+      Math.floor(index / parseInt(process.env.GATSBY_POSTS_PER_PAGE)) + 1;
+    const currentPagePathSuffix =
+      currentPage === 1 ? '' : `page/${currentPage}`;
+    const currentPagePath = `${process.env.GATSBY_WEB_PREFIX}/${process.env.GATSBY_POSTS_PREFIX}/${currentPagePathSuffix}`;
+
+    if (!postsByPage[currentPagePath]) {
+      postsByPage[currentPagePath] = [];
+    }
+    postsByPage[currentPagePath].push(post);
+  });
+
+  const pagePaths = Object.keys(postsByPage);
+  Object.entries(postsByPage).map(([pagePath, pagePosts], index) => {
+    const previous =
+      index === 0
+        ? null
+        : { name: '← Previous Page', url: pagePaths[index - 1] };
+    const next =
+      index === pagePaths.length - 1
+        ? null
+        : { name: 'Next Page →', url: pagePaths[index + 1] };
+
+    createPage({
+      path: pagePath,
+      component: postsPaginationTemplate,
+      context: {
+        posts: pagePosts,
+        previous,
+        next,
+        currentPage: index + 1,
+        totalPages: pagePaths.length,
       },
     });
   });
@@ -93,6 +134,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const posts = result.data.allMdx.nodes;
 
   createTagPage(createPage, posts);
+  createPostPaginationPage(createPage, posts);
   // create page for each mdx file
   posts.forEach((post) => {
     const postPath = `${process.env.GATSBY_WEB_PREFIX}/${process.env.GATSBY_POSTS_PREFIX}/${post.frontmatter.slug}`;
