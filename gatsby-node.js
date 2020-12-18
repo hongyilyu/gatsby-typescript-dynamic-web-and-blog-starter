@@ -94,8 +94,7 @@ const createPostPaginationPage = (createPage, posts) => {
         posts: pagePosts,
         previous,
         next,
-        currentPage: index + 1,
-        totalPages: pagePaths.length,
+        middleText: `Page ${index + 1} of ${pagePaths.length}`,
       },
     });
   });
@@ -120,7 +119,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           timeToRead
           rawBody
           fields {
-            slug
+            full_slug_url
           }
         }
       }
@@ -137,12 +136,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   createPostPaginationPage(createPage, posts);
   // create page for each mdx file
   posts.forEach((post) => {
-    const postPath = `${process.env.GATSBY_WEB_PREFIX}/${process.env.GATSBY_POSTS_PREFIX}/${post.frontmatter.slug}`;
     createPage({
-      path: postPath,
+      path: post.fields.full_slug_url,
       component: postTemplate,
       context: {
-        slug: post.frontmatter.slug,
+        full_slug_url: post.fields.full_slug_url,
       },
     });
   });
@@ -153,9 +151,9 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 
   if (node.internal.type === 'Mdx') {
     createNodeField({
-      name: 'slug',
+      name: 'full_slug_url',
       node,
-      value: node.frontmatter.slug,
+      value: `${process.env.GATSBY_WEB_PREFIX}/${process.env.GATSBY_POSTS_PREFIX}/${node.frontmatter.slug}`,
     });
   }
 };

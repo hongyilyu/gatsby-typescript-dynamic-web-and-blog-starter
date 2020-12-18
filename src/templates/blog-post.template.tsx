@@ -34,8 +34,8 @@ const BlogPostTemplate: React.FC<PageProps<PostsBySlugQuery>> = ({
 };
 
 export const query = graphql`
-  query PostsBySlug($slug: String!) {
-    mdx(fields: { slug: { eq: $slug } }) {
+  query PostsBySlug($full_slug_url: String!) {
+    mdx(fields: { full_slug_url: { eq: $full_slug_url } }) {
       body
       tableOfContents
       timeToRead

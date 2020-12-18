@@ -15,17 +15,11 @@ interface PageContext {
   posts: Mdx[];
   next: PaginationLabel;
   previous: PaginationLabel;
-  currentPage: number;
-  totalPages: number;
+  middleText: string;
 }
 
 const PostsPaginationTemplate: React.FC<PageProps> = ({ pageContext }) => {
-  const {
-    posts,
-    currentPage,
-    totalPages,
-    ...rest
-  } = pageContext as PageContext;
+  const { posts, ...rest } = pageContext as PageContext;
   return (
     <WikiLayout>
       <SEO title={'LHY iS Learning'} description={`All Posts`} />
@@ -40,10 +34,7 @@ const PostsPaginationTemplate: React.FC<PageProps> = ({ pageContext }) => {
             {posts.map((post) => (
               <ArticlePreview post={post} />
             ))}
-            <Pagination
-              {...rest}
-              middleText={`Page ${currentPage} of ${totalPages}`}
-            />
+            <Pagination {...rest} />
           </VerticalCenterContainer>
         </Grid>
         <Grid item xs></Grid>

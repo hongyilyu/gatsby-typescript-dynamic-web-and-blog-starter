@@ -9,7 +9,7 @@ import VerticalTicketRip from '@mui-treasury/components/rip/verticalTicket';
 //@ts-ignore
 import { useVerticalRipStyles } from '@mui-treasury/styles/rip/vertical';
 import { Link } from '@reach/router';
-import { POSTS_URL_PREFIX, USER_IMG_URL } from '../../utils/url.utils';
+import { USER_IMG_URL } from '../../utils/url.utils';
 import HighlightedText from './highlighted-text.component';
 
 const mainColor = '#003399';
@@ -129,7 +129,7 @@ const ResultInfo = React.memo(function PlaneTicketCard({ result }: any) {
 const SearchDropdownItem: React.FC<{ result: any }> = ({ result }) => {
   return (
     <Link
-      to={`${POSTS_URL_PREFIX}/${result.url}`}
+      to={`${result.url}`}
       style={{
         textDecoration: 'none',
         display: 'inline-block',

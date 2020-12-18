@@ -92,7 +92,7 @@ module.exports = {
           Mdx: {
             title: (node) => node.frontmatter.title,
             content: (node) => stripMarkdown(node.rawBody),
-            url: (node) => node.fields.slug,
+            url: (node) => node.fields.full_slug_url,
             author: (node) => node.frontmatter.author,
             editors: (node) => node.frontmatter.edit_by,
           },

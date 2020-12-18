@@ -7,7 +7,7 @@ import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye';
 
 import { Mdx } from '../../graphql';
 import { USER_NAME } from '../../utils/string.utils';
-import { POSTS_URL_PREFIX, USER_IMG_URL } from '../../utils/url.utils';
+import { USER_IMG_URL } from '../../utils/url.utils';
 import { LinkContainer } from '../custom-element/shared-style.util';
 import TagList, { TagStyle } from '../tag-list.component';
 import useIconSpace from '../../hooks/use-icon-string.hook';
@@ -103,10 +103,11 @@ const ReadThePost = styled.p`
 `;
 
 const ArticlePreview: React.FC<{ post: Mdx }> = ({
-  post: { frontmatter, timeToRead, excerpt },
+  post: { frontmatter, timeToRead, excerpt, fields },
 }) => {
   const [authorName, setAuthorName] = useState('');
-  const { title, slug, date, tags, author } = frontmatter!;
+  const { title, date, tags, author } = frontmatter!;
+  const { full_slug_url } = fields!;
   useEffect(() => {
     USER_NAME(author!)
       .then((name) => setAuthorName(name))
@@ -117,10 +118,7 @@ const ArticlePreview: React.FC<{ post: Mdx }> = ({
     <Post className='content'>
       <header>
         <Title>
-          <LinkContainer
-            style={{ boxShadow: 'none' }}
-            to={`${POSTS_URL_PREFIX}/${slug}`}
-          >
+          <LinkContainer style={{ boxShadow: 'none' }} to={`${full_slug_url}`}>
             {title}
           </LinkContainer>
         </Title>
@@ -160,9 +158,7 @@ const ArticlePreview: React.FC<{ post: Mdx }> = ({
         <Grid item xs={12}></Grid>
       </Grid>
       <ReadThePost>
-        <LinkContainer to={`${POSTS_URL_PREFIX}/${slug}`}>
-          Read the post →
-        </LinkContainer>
+        <LinkContainer to={`${full_slug_url}`}>Read the post →</LinkContainer>
       </ReadThePost>
     </Post>
   );

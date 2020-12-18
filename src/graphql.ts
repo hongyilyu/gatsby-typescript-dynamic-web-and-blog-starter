@@ -709,7 +709,6 @@ export enum FileFieldsEnum {
   ChildMdxFrontmatterSlug = 'childMdx___frontmatter___slug',
   ChildMdxFrontmatterTags = 'childMdx___frontmatter___tags',
   ChildMdxFrontmatterEditBy = 'childMdx___frontmatter___edit_by',
-  ChildMdxFrontmatterPrivate = 'childMdx___frontmatter___private',
   ChildMdxFrontmatterUuid = 'childMdx___frontmatter___uuid',
   ChildMdxFrontmatterLayout = 'childMdx___frontmatter___layout',
   ChildMdxFrontmatterUpdated = 'childMdx___frontmatter___updated',
@@ -824,6 +823,7 @@ export enum FileFieldsEnum {
   ChildMdxFrontmatterTwImgChildren = 'childMdx___frontmatter___tw_img___children',
   ChildMdxFrontmatterStatus = 'childMdx___frontmatter___status',
   ChildMdxFrontmatterLanguage = 'childMdx___frontmatter___language',
+  ChildMdxFrontmatterPrivate = 'childMdx___frontmatter___private',
   ChildMdxSlug = 'childMdx___slug',
   ChildMdxBody = 'childMdx___body',
   ChildMdxExcerpt = 'childMdx___excerpt',
@@ -837,7 +837,7 @@ export enum FileFieldsEnum {
   ChildMdxWordCountParagraphs = 'childMdx___wordCount___paragraphs',
   ChildMdxWordCountSentences = 'childMdx___wordCount___sentences',
   ChildMdxWordCountWords = 'childMdx___wordCount___words',
-  ChildMdxFieldsSlug = 'childMdx___fields___slug',
+  ChildMdxFieldsFullSlugUrl = 'childMdx___fields___full_slug_url',
   ChildMdxId = 'childMdx___id',
   ChildMdxParentId = 'childMdx___parent___id',
   ChildMdxParentParentId = 'childMdx___parent___parent___id',
@@ -1622,7 +1622,7 @@ export type MdxEdge = {
 
 export type MdxFields = {
   __typename?: 'MdxFields';
-  slug?: Maybe<Scalars['String']>;
+  full_slug_url?: Maybe<Scalars['String']>;
 };
 
 export enum MdxFieldsEnum {
@@ -1635,7 +1635,6 @@ export enum MdxFieldsEnum {
   FrontmatterSlug = 'frontmatter___slug',
   FrontmatterTags = 'frontmatter___tags',
   FrontmatterEditBy = 'frontmatter___edit_by',
-  FrontmatterPrivate = 'frontmatter___private',
   FrontmatterUuid = 'frontmatter___uuid',
   FrontmatterLayout = 'frontmatter___layout',
   FrontmatterUpdated = 'frontmatter___updated',
@@ -1867,6 +1866,7 @@ export enum MdxFieldsEnum {
   FrontmatterTwImgChildMdxChildren = 'frontmatter___tw_img___childMdx___children',
   FrontmatterStatus = 'frontmatter___status',
   FrontmatterLanguage = 'frontmatter___language',
+  FrontmatterPrivate = 'frontmatter___private',
   Slug = 'slug',
   Body = 'body',
   Excerpt = 'excerpt',
@@ -1880,7 +1880,7 @@ export enum MdxFieldsEnum {
   WordCountParagraphs = 'wordCount___paragraphs',
   WordCountSentences = 'wordCount___sentences',
   WordCountWords = 'wordCount___words',
-  FieldsSlug = 'fields___slug',
+  FieldsFullSlugUrl = 'fields___full_slug_url',
   Id = 'id',
   ParentId = 'parent___id',
   ParentParentId = 'parent___parent___id',
@@ -1970,7 +1970,7 @@ export enum MdxFieldsEnum {
 }
 
 export type MdxFieldsFilterInput = {
-  slug?: Maybe<StringQueryOperatorInput>;
+  full_slug_url?: Maybe<StringQueryOperatorInput>;
 };
 
 export type MdxFilterInput = {
@@ -2002,7 +2002,6 @@ export type MdxFrontmatter = {
   slug?: Maybe<Scalars['String']>;
   tags?: Maybe<Array<Maybe<Scalars['String']>>>;
   edit_by?: Maybe<Array<Maybe<Scalars['String']>>>;
-  private?: Maybe<Scalars['Boolean']>;
   uuid?: Maybe<Scalars['String']>;
   layout?: Maybe<Scalars['String']>;
   updated?: Maybe<Scalars['Date']>;
@@ -2013,6 +2012,7 @@ export type MdxFrontmatter = {
   tw_img?: Maybe<File>;
   status?: Maybe<Scalars['String']>;
   language?: Maybe<Scalars['String']>;
+  private?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -2039,7 +2039,6 @@ export type MdxFrontmatterFilterInput = {
   slug?: Maybe<StringQueryOperatorInput>;
   tags?: Maybe<StringQueryOperatorInput>;
   edit_by?: Maybe<StringQueryOperatorInput>;
-  private?: Maybe<BooleanQueryOperatorInput>;
   uuid?: Maybe<StringQueryOperatorInput>;
   layout?: Maybe<StringQueryOperatorInput>;
   updated?: Maybe<DateQueryOperatorInput>;
@@ -2050,6 +2049,7 @@ export type MdxFrontmatterFilterInput = {
   tw_img?: Maybe<FileFilterInput>;
   status?: Maybe<StringQueryOperatorInput>;
   language?: Maybe<StringQueryOperatorInput>;
+  private?: Maybe<BooleanQueryOperatorInput>;
 };
 
 export type MdxFrontmatterTest_Img = {
@@ -2799,11 +2799,92 @@ export type SitePageConnectionGroupArgs = {
 
 export type SitePageContext = {
   __typename?: 'SitePageContext';
-  slug?: Maybe<Scalars['String']>;
+  posts?: Maybe<Array<Maybe<SitePageContextPosts>>>;
+  tag?: Maybe<Scalars['String']>;
+  previous?: Maybe<SitePageContextPrevious>;
+  next?: Maybe<SitePageContextNext>;
+  middleText?: Maybe<Scalars['String']>;
+  full_slug_url?: Maybe<Scalars['String']>;
 };
 
 export type SitePageContextFilterInput = {
+  posts?: Maybe<SitePageContextPostsFilterListInput>;
+  tag?: Maybe<StringQueryOperatorInput>;
+  previous?: Maybe<SitePageContextPreviousFilterInput>;
+  next?: Maybe<SitePageContextNextFilterInput>;
+  middleText?: Maybe<StringQueryOperatorInput>;
+  full_slug_url?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePageContextNext = {
+  __typename?: 'SitePageContextNext';
+  name?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+};
+
+export type SitePageContextNextFilterInput = {
+  name?: Maybe<StringQueryOperatorInput>;
+  url?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePageContextPosts = {
+  __typename?: 'SitePageContextPosts';
+  frontmatter?: Maybe<SitePageContextPostsFrontmatter>;
+  excerpt?: Maybe<Scalars['String']>;
+  timeToRead?: Maybe<Scalars['Int']>;
+  rawBody?: Maybe<Scalars['String']>;
+  fields?: Maybe<SitePageContextPostsFields>;
+};
+
+export type SitePageContextPostsFields = {
+  __typename?: 'SitePageContextPostsFields';
+  full_slug_url?: Maybe<Scalars['String']>;
+};
+
+export type SitePageContextPostsFieldsFilterInput = {
+  full_slug_url?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePageContextPostsFilterInput = {
+  frontmatter?: Maybe<SitePageContextPostsFrontmatterFilterInput>;
+  excerpt?: Maybe<StringQueryOperatorInput>;
+  timeToRead?: Maybe<IntQueryOperatorInput>;
+  rawBody?: Maybe<StringQueryOperatorInput>;
+  fields?: Maybe<SitePageContextPostsFieldsFilterInput>;
+};
+
+export type SitePageContextPostsFilterListInput = {
+  elemMatch?: Maybe<SitePageContextPostsFilterInput>;
+};
+
+export type SitePageContextPostsFrontmatter = {
+  __typename?: 'SitePageContextPostsFrontmatter';
+  slug?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<Scalars['String']>>>;
+  date?: Maybe<Scalars['String']>;
+  author?: Maybe<Scalars['String']>;
+  edit_by?: Maybe<Array<Maybe<Scalars['String']>>>;
+  title?: Maybe<Scalars['String']>;
+};
+
+export type SitePageContextPostsFrontmatterFilterInput = {
   slug?: Maybe<StringQueryOperatorInput>;
+  tags?: Maybe<StringQueryOperatorInput>;
+  date?: Maybe<StringQueryOperatorInput>;
+  author?: Maybe<StringQueryOperatorInput>;
+  edit_by?: Maybe<StringQueryOperatorInput>;
+  title?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePageContextPrevious = {
+  __typename?: 'SitePageContextPrevious';
+  name?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+};
+
+export type SitePageContextPreviousFilterInput = {
+  name?: Maybe<StringQueryOperatorInput>;
+  url?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePageEdge = {
@@ -2906,7 +2987,24 @@ export enum SitePageFieldsEnum {
   InternalOwner = 'internal___owner',
   InternalType = 'internal___type',
   IsCreatedByStatefulCreatePages = 'isCreatedByStatefulCreatePages',
-  ContextSlug = 'context___slug',
+  ContextPosts = 'context___posts',
+  ContextPostsFrontmatterSlug = 'context___posts___frontmatter___slug',
+  ContextPostsFrontmatterTags = 'context___posts___frontmatter___tags',
+  ContextPostsFrontmatterDate = 'context___posts___frontmatter___date',
+  ContextPostsFrontmatterAuthor = 'context___posts___frontmatter___author',
+  ContextPostsFrontmatterEditBy = 'context___posts___frontmatter___edit_by',
+  ContextPostsFrontmatterTitle = 'context___posts___frontmatter___title',
+  ContextPostsExcerpt = 'context___posts___excerpt',
+  ContextPostsTimeToRead = 'context___posts___timeToRead',
+  ContextPostsRawBody = 'context___posts___rawBody',
+  ContextPostsFieldsFullSlugUrl = 'context___posts___fields___full_slug_url',
+  ContextTag = 'context___tag',
+  ContextPreviousName = 'context___previous___name',
+  ContextPreviousUrl = 'context___previous___url',
+  ContextNextName = 'context___next___name',
+  ContextNextUrl = 'context___next___url',
+  ContextMiddleText = 'context___middleText',
+  ContextFullSlugUrl = 'context___full_slug_url',
   PluginCreatorId = 'pluginCreator___id',
   PluginCreatorParentId = 'pluginCreator___parent___id',
   PluginCreatorParentParentId = 'pluginCreator___parent___parent___id',
@@ -3584,7 +3682,7 @@ export type Unnamed_2_Query = (
 );
 
 export type PostsBySlugQueryVariables = Exact<{
-  slug: Scalars['String'];
+  full_slug_url: Scalars['String'];
 }>;
 
 
