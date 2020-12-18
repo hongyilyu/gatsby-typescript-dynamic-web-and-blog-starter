@@ -9,7 +9,7 @@ const TagChip: React.FC<TagProps> = ({ name, href }) => {
   if (href === undefined) href = slugify(name.toLowerCase());
   return (
     <Link to={`${POSTS_URL_PREFIX}/tags/${href}`}>
-      <Chip label={name} />
+      <Chip label={name} onClick={(e) => e.preventDefault} />
     </Link>
   );
 };

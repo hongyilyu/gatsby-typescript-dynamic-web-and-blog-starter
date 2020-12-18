@@ -67,14 +67,6 @@ const Excerpt = styled.p`
   max-width: 820px;
 `;
 
-const ProfilePic = styled.img`
-  width: 24px;
-  height: 24px;
-  float: left;
-  margin-right: 9px;
-  border-radius: 100%;
-`;
-
 const ReadThePost = styled.p`
   text-align: center;
   margin-top: 2rem !important;
