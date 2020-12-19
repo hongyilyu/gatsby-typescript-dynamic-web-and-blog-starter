@@ -85,7 +85,7 @@ module.exports = {
           { name: 'content', store: true },
           { name: 'url', store: true },
           { name: 'author', store: true },
-          { name: 'editor', store: true },
+          { name: 'editors', store: true },
         ],
         filterNodes: (node) => !!node.frontmatter,
         resolvers: {
