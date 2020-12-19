@@ -10,6 +10,7 @@ import SEO from '../components/SEO.component';
 
 const BlogPostTemplate: React.FC<PageProps<PostsBySlugQuery>> = ({
   data: { mdx },
+  pageContext,
 }) => {
   const { frontmatter, tableOfContents } = mdx!;
   return (
@@ -23,7 +24,7 @@ const BlogPostTemplate: React.FC<PageProps<PostsBySlugQuery>> = ({
       <Grid container justify='center' spacing={2}>
         <Grid item xs></Grid>
         <Grid item xs={6}>
-          <Article mdx={mdx as Mdx} />
+          <Article mdx={mdx as Mdx} pageContext={pageContext} />
         </Grid>
         <Grid item xs style={{ position: 'relative' }}>
           <TableOfContent toc={tableOfContents} />

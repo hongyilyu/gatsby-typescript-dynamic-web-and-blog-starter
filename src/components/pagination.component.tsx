@@ -90,13 +90,18 @@ interface PaginationProps {
   middleText?: string;
 }
 
+const TEXT_LENGTH = 15;
+
 const Pagination: React.FC<PaginationProps> = ({
   next,
   previous,
   middleText,
 }) => {
-  const previousLabel = (previous && previous.name) || '← Previous Page';
-  const nextLabel = (next && next.name) || 'Next Page →';
+  const previousLabel =
+    '← ' +
+    ((previous && previous.name) || 'Previous Page').substring(0, TEXT_LENGTH);
+  const nextLabel =
+    ((next && next.name) || 'Next Page →').substring(0, TEXT_LENGTH) + ' →';
   return (
     <PaginationContainer>
       {previous ? (

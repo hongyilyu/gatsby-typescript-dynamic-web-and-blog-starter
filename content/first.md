@@ -9,6 +9,8 @@ tags:
   - def
 edit_by:
   - lhy-is-learning
+next_post: 1st
+previous_post: 2nd
 ---
 
 ## Markdown Cheatsheet

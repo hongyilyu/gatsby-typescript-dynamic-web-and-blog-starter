@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import GitHubIcon from '@material-ui/icons/GitHub';
+import Pagination, { PaginationLabel } from '../pagination.component';
 
 const GitHubSectionContainer = styled.div`
   margin: 2em 0;
@@ -26,7 +27,12 @@ const GitHubSectionContainer = styled.div`
   }
 `;
 
-const PostArticle: React.FC = () => {
+interface PostArticleProps {
+  next?: PaginationLabel;
+  previous?: PaginationLabel;
+}
+
+const PostArticle: React.FC<PostArticleProps> = ({ ...all }) => {
   const githubLink = 'https://github.com/lhy-is-learning';
   return (
     <>
@@ -51,7 +57,7 @@ const PostArticle: React.FC = () => {
           lineHeight: '1.2',
         }}
       >
-        Comments here maybe
+        <Pagination {...all} />
       </div>
     </>
   );

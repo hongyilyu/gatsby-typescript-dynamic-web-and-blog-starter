@@ -79,13 +79,11 @@ const createPostPaginationPage = (createPage, posts) => {
   const pagePaths = Object.keys(postsByPage);
   Object.entries(postsByPage).map(([pagePath, pagePosts], index) => {
     const previous =
-      index === 0
-        ? null
-        : { name: '← Previous Page', url: pagePaths[index - 1] };
+      index === 0 ? null : { name: 'Previous Page', url: pagePaths[index - 1] };
     const next =
       index === pagePaths.length - 1
         ? null
-        : { name: 'Next Page →', url: pagePaths[index + 1] };
+        : { name: 'Next Page', url: pagePaths[index + 1] };
 
     createPage({
       path: pagePath,
@@ -114,6 +112,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             author
             edit_by
             title
+            next_post
+            previous_post
           }
           excerpt(pruneLength: 512)
           timeToRead
@@ -136,11 +136,31 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   createPostPaginationPage(createPage, posts);
   // create page for each mdx file
   posts.forEach((post) => {
+    const prevPost = post.frontmatter.previous_post
+      ? posts.find(
+          (prevPost) =>
+            prevPost.frontmatter.slug === post.frontmatter.previous_post
+        )
+      : undefined;
+    const nextPost = post.frontmatter.next_post
+      ? posts.find(
+          (prevPost) => prevPost.frontmatter.slug === post.frontmatter.next_post
+        )
+      : undefined;
+
     createPage({
       path: post.fields.full_slug_url,
       component: postTemplate,
       context: {
         full_slug_url: post.fields.full_slug_url,
+        previous: prevPost && {
+          name: prevPost.frontmatter.title,
+          url: prevPost.fields.full_slug_url,
+        },
+        next: nextPost && {
+          name: nextPost.frontmatter.title,
+          url: nextPost.fields.full_slug_url,
+        },
       },
     });
   });
