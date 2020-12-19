@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { getContent, getStandardScheme, Root } from '@mui-treasury/layout';
-import { RouteComponentProps } from '@reach/router';
 
 import Footer from '../components/footer.component';
 import Header from '../components/header.component';
@@ -30,16 +29,7 @@ scheme.configureEdgeSidebar((builder) => {
 
 scheme.enableAutoCollapse('unique_id', 'md');
 
-type DashboardProps = RouteComponentProps<{ results: string }>;
-
-const Dashboard: React.FC<DashboardProps> = ({ results = 2 }) => {
-  const [person, setPerson] = useState();
-  useEffect(() => {
-    fetch(`https://randomuser.me/api?results=${results}`)
-      .then((x) => x.json())
-      .then((x) => setPerson(x));
-  }, [results]);
-
+const StandardLayout: React.FC = ({ children }) => {
   return (
     <Root scheme={scheme}>
       {({ state: { sidebar } }) => (
@@ -49,11 +39,7 @@ const Dashboard: React.FC<DashboardProps> = ({ results = 2 }) => {
           <Header />
           <div style={{ minHeight: `${BottomFooter}` }}>
             <SideBar sidebar={sidebar} />
-            <Content>
-              <div>
-                <pre>{JSON.stringify(person, null, 2)}</pre>
-              </div>
-            </Content>
+            <Content>{children}</Content>
           </div>
           <Footer />
         </>
@@ -62,4 +48,4 @@ const Dashboard: React.FC<DashboardProps> = ({ results = 2 }) => {
   );
 };
 
-export default Dashboard;
+export default StandardLayout;

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Router as MyRouter } from '@reach/router';
 
-import Dashboard from '../layouts/standard.layout';
+import Dashboard from '../apps/dashboard.app';
 
 const Router = () => {
   return (

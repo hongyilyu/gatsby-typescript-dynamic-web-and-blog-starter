@@ -4,11 +4,20 @@ import Divider from '@material-ui/core/Divider';
 import Folder from '@material-ui/icons/Folder';
 import Settings from '@material-ui/icons/Settings';
 import SideBarContentItem from './side-bar-content-item.component';
+import DescriptionIcon from '@material-ui/icons/Description';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import { Link } from '@reach/router';
 
 const list = [
   {
-    primaryText: 'My Files',
-    icon: <Folder />,
+    primaryText: 'Posts',
+    icon: <DescriptionIcon />,
+    url: '/posts',
+  },
+  {
+    primaryText: 'Dashboard',
+    icon: <DashboardIcon />,
+    url: '/app/dashboard',
   },
 ];
 
@@ -18,14 +27,16 @@ const SideBarContent: React.FC<{ onClickItem?: (e: any) => void }> = ({
   const [selected, setSelected] = useState(-1);
   return (
     <List>
-      {list.map(({ primaryText, icon }, i) => (
-        <SideBarContentItem
-          primaryText={primaryText}
-          icon={icon}
-          onClickItem={onClickItem}
-          currentSelection={selected}
-          index={i}
-        />
+      {list.map(({ primaryText, icon, url }, i) => (
+        <Link to={url} style={{ textDecoration: 'none', color: 'inherit' }}>
+          <SideBarContentItem
+            primaryText={primaryText}
+            icon={icon}
+            onClickItem={onClickItem}
+            currentSelection={selected}
+            index={i}
+          />
+        </Link>
       ))}
       <Divider style={{ margin: '12px 0' }} />
       <SideBarContentItem
