@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import SearchBar from './search-bar.component';
+import { SearchResult } from './search-bar.type';
 import SearchDropdown from './search-dropdown.component';
 
 const Search: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [searchResults, setSearchResults] = useState<any>([]);
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [blur, setBlur] = useState(true);
   return (
     <div>

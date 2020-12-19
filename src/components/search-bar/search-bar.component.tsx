@@ -4,6 +4,7 @@ import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import useDarkMode from 'use-dark-mode';
 import styled from 'styled-components';
+import { SearchResult } from './search-bar.type';
 
 const SearchWrapper = styled.div`
   position: relative;
@@ -64,8 +65,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
 }) => {
   const { value } = useDarkMode();
   const classes = useStyles();
-  const getPositions = (searchResult: any, field: any) => {
-    let positions: any[] = [];
+  const getPositions = (searchResult: lunr.Index.Result, field: string) => {
+    let positions: number[][] = [];
     if (searchResult.matchData && searchResult.matchData.metadata) {
       const data = searchResult.matchData.metadata;
       Object.keys(data).forEach((searchTerm) => {
@@ -79,9 +80,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
   const search = (searchQuery: string) => {
     if (searchQuery.length < 3 || !window.__LUNR__) return [];
-    const results = window.__LUNR__.en.index.search(searchQuery);
+    const results: lunr.Index.Result[] = window.__LUNR__.en.index.search(
+      searchQuery
+    );
 
-    const searchResults = results.map((searchResult: any) => {
+    const searchResults: SearchResult[] = results.map((searchResult) => {
       const doc = window.__LUNR__.en.store[searchResult.ref];
       return {
         titlePos: getPositions(searchResult, 'title'),

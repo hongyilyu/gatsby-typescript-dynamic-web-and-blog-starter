@@ -11,6 +11,7 @@ import { useVerticalRipStyles } from '@mui-treasury/styles/rip/vertical';
 import { Link } from '@reach/router';
 import { USER_IMG_URL } from '../../utils/url.utils';
 import HighlightedText from './highlighted-text.component';
+import { SearchResult } from './search-bar.type';
 
 const mainColor = '#003399';
 const lightColor = '#ecf2ff';
@@ -80,7 +81,11 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
   moveRight: {},
 }));
 
-const ResultInfo = React.memo(function PlaneTicketCard({ result }: any) {
+const ResultInfo = React.memo(function PlaneTicketCard({
+  result,
+}: {
+  result: SearchResult;
+}) {
   const styles = useStyles();
   const ripStyles = useVerticalRipStyles({
     size: 24,
@@ -126,7 +131,7 @@ const ResultInfo = React.memo(function PlaneTicketCard({ result }: any) {
   );
 });
 
-const SearchDropdownItem: React.FC<{ result: any }> = ({ result }) => {
+const SearchDropdownItem: React.FC<{ result: SearchResult }> = ({ result }) => {
   return (
     <Link
       to={`${result.url}`}

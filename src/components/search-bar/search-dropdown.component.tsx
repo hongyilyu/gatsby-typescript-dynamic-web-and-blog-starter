@@ -1,8 +1,9 @@
 import { Paper } from '@material-ui/core';
 import React from 'react';
+import { SearchResult } from './search-bar.type';
 import SearchDropdownItem from './search-dropdown-item.component';
 
-const SearchDropdown: React.FC<{ searchResults: any[] }> = ({
+const SearchDropdown: React.FC<{ searchResults: SearchResult[] }> = ({
   searchResults,
 }) => {
   return (
