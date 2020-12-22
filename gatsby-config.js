@@ -1,14 +1,14 @@
 const remark = require('remark');
 const strip = require('strip-markdown');
 require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV}`,
+  path: `.env`,
 });
 
-const lunrHighlightPlugin = () => (builder) => {
+const lunrHighlightPlugin = () => builder => {
   builder.metadataWhitelist.push('position');
 };
 
-const stripMarkdown = (markdown) => {
+const stripMarkdown = markdown => {
   let text = markdown;
   remark()
     .use(strip)
@@ -29,6 +29,7 @@ const siteMetadata = {
 };
 
 module.exports = {
+  pathPrefix: `/${process.env.GATSBY_WEB_PREFIX}`,
   siteMetadata,
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -87,14 +88,14 @@ module.exports = {
           { name: 'author', store: true },
           { name: 'editors', store: true },
         ],
-        filterNodes: (node) => !!node.frontmatter,
+        filterNodes: node => !!node.frontmatter,
         resolvers: {
           Mdx: {
-            title: (node) => node.frontmatter.title,
-            content: (node) => stripMarkdown(node.rawBody),
-            url: (node) => node.fields.full_slug_url,
-            author: (node) => node.frontmatter.author,
-            editors: (node) => node.frontmatter.edit_by,
+            title: node => node.frontmatter.title,
+            content: node => stripMarkdown(node.rawBody),
+            url: node => node.fields.full_slug_url,
+            author: node => node.frontmatter.author,
+            editors: node => node.frontmatter.edit_by,
           },
         },
         fetchOptions: {

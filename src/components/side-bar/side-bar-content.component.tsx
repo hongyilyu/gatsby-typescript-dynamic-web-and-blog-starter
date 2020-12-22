@@ -6,17 +6,18 @@ import SideBarContentItem from './side-bar-content-item.component';
 import DescriptionIcon from '@material-ui/icons/Description';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import { Link } from '@reach/router';
+import { WEB_PREFIX } from '../../utils/url.utils';
 
 const list = [
   {
     primaryText: 'Posts',
     icon: <DescriptionIcon />,
-    url: '/posts',
+    url: 'posts',
   },
   {
     primaryText: 'Dashboard',
     icon: <DashboardIcon />,
-    url: '/app/dashboard',
+    url: 'app/dashboard',
   },
 ];
 
@@ -27,7 +28,11 @@ const SideBarContent: React.FC<{ onClickItem?: (e: any) => void }> = ({
   return (
     <List>
       {list.map(({ primaryText, icon, url }, i) => (
-        <Link to={url} style={{ textDecoration: 'none', color: 'inherit' }}>
+        <Link
+          to={WEB_PREFIX ? `/${WEB_PREFIX}/${url}` : `/${url}`}
+          style={{ textDecoration: 'none', color: 'inherit' }}
+          key={i}
+        >
           <SideBarContentItem
             primaryText={primaryText}
             icon={icon}

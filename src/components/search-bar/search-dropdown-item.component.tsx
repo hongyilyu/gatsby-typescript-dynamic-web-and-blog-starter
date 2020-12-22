@@ -9,7 +9,7 @@ import VerticalTicketRip from '@mui-treasury/components/rip/verticalTicket';
 //@ts-ignore
 import { useVerticalRipStyles } from '@mui-treasury/styles/rip/vertical';
 import { Link } from '@reach/router';
-import { USER_IMG_URL } from '../../utils/url.utils';
+import { USER_IMG_URL, WEB_PREFIX } from '../../utils/url.utils';
 import HighlightedText from './highlighted-text.component';
 import { SearchResult } from './search-bar.type';
 
@@ -134,7 +134,7 @@ const ResultInfo = React.memo(function PlaneTicketCard({
 const SearchDropdownItem: React.FC<{ result: SearchResult }> = ({ result }) => {
   return (
     <Link
-      to={`${result.url}`}
+      to={WEB_PREFIX ? `/${WEB_PREFIX}${result.url}` : result.url} // no second slash on purpose
       style={{
         textDecoration: 'none',
         display: 'inline-block',

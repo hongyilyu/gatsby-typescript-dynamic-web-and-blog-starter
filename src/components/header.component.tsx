@@ -4,6 +4,7 @@ import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import { DarkMode } from './dark-mode.component';
 import { Search } from './search-bar';
 import { Link } from '@reach/router';
+import { WEB_PREFIX } from '../utils/url.utils';
 
 const TypographyWrapper = styled(Typography)`
   font-weight: 900;
@@ -21,7 +22,7 @@ const HeaderWrapper = styled(AppBar)`
 const Header: React.FC = () => (
   <HeaderWrapper>
     <Toolbar>
-      <Link to='/' style={{ textDecoration: 'none' }}>
+      <Link to={`${WEB_PREFIX}`} style={{ textDecoration: 'none' }}>
         <TypographyWrapper noWrap>LHY-iS-Learning</TypographyWrapper>
       </Link>
       <div style={{ flexGrow: 1 }} />

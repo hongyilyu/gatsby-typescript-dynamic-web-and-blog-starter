@@ -30,12 +30,12 @@ const createTagPage = (createPage, posts) => {
 
   const postsByTag = {};
 
-  posts.map((post) => {
+  posts.map(post => {
     const {
       frontmatter: { tags },
     } = post;
     if (tags) {
-      tags.map((tag) => {
+      tags.map(tag => {
         if (!postsByTag[tag]) {
           postsByTag[tag] = [];
         }
@@ -46,7 +46,7 @@ const createTagPage = (createPage, posts) => {
 
   Object.entries(postsByTag).map(([tag, tagPosts]) => {
     createPage({
-      path: `${process.env.GATSBY_WEB_PREFIX}/${process.env.GATSBY_POSTS_PREFIX}/tags/${tag}`,
+      path: `${process.env.GATSBY_POSTS_PREFIX}/tags/${tag}`,
       component: tagTemplate,
       context: {
         posts: tagPosts,
@@ -58,7 +58,7 @@ const createTagPage = (createPage, posts) => {
 
 const createPostPaginationPage = (createPage, posts) => {
   const postsPaginationTemplate = path.resolve(
-    `src/templates/posts-pagination.template.tsx`
+    `src/templates/posts-pagination.template.tsx`,
   );
 
   const postsByPage = {};
@@ -68,7 +68,7 @@ const createPostPaginationPage = (createPage, posts) => {
       Math.floor(index / parseInt(process.env.GATSBY_POSTS_PER_PAGE)) + 1;
     const currentPagePathSuffix =
       currentPage === 1 ? '' : `page/${currentPage}`;
-    const currentPagePath = `${process.env.GATSBY_WEB_PREFIX}/${process.env.GATSBY_POSTS_PREFIX}/${currentPagePathSuffix}`;
+    const currentPagePath = `${process.env.GATSBY_POSTS_PREFIX}/${currentPagePathSuffix}`;
 
     if (!postsByPage[currentPagePath]) {
       postsByPage[currentPagePath] = [];
@@ -135,16 +135,16 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   createTagPage(createPage, posts);
   createPostPaginationPage(createPage, posts);
   // create page for each mdx file
-  posts.forEach((post) => {
+  posts.forEach(post => {
     const prevPost = post.frontmatter.previous_post
       ? posts.find(
-          (prevPost) =>
-            prevPost.frontmatter.slug === post.frontmatter.previous_post
+          prevPost =>
+            prevPost.frontmatter.slug === post.frontmatter.previous_post,
         )
       : undefined;
     const nextPost = post.frontmatter.next_post
       ? posts.find(
-          (prevPost) => prevPost.frontmatter.slug === post.frontmatter.next_post
+          prevPost => prevPost.frontmatter.slug === post.frontmatter.next_post,
         )
       : undefined;
 
@@ -173,7 +173,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     createNodeField({
       name: 'full_slug_url',
       node,
-      value: `${process.env.GATSBY_WEB_PREFIX}/${process.env.GATSBY_POSTS_PREFIX}/${node.frontmatter.slug}`,
+      value: `/${process.env.GATSBY_POSTS_PREFIX}/${node.frontmatter.slug}`,
     });
   }
 };

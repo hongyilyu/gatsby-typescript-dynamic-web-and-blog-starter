@@ -109,12 +109,12 @@ const Pagination: React.FC<PaginationProps> = ({
           css={`
             ${pageLink} ${pageLinkPrev}
           `}
-          to={previous.url}
+          to={`/${previous.url}`}
         >
           {previousLabel}
         </LinkContainer>
       ) : (
-        <Spacer className='previous' />
+        <Spacer className="previous" />
       )}
       <PageLabel>{middleText}</PageLabel>
       {next ? (
@@ -122,12 +122,12 @@ const Pagination: React.FC<PaginationProps> = ({
           css={`
             ${pageLink} ${pageLinkNext}
           `}
-          to={next.url}
+          to={`/${next.url}`}
         >
           {nextLabel}
         </LinkContainer>
       ) : (
-        <Spacer className='next' />
+        <Spacer className="next" />
       )}
     </PaginationContainer>
   );
