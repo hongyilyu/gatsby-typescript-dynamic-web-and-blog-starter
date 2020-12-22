@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
-import Folder from '@material-ui/icons/Folder';
 import Settings from '@material-ui/icons/Settings';
 import SideBarContentItem from './side-bar-content-item.component';
 import DescriptionIcon from '@material-ui/icons/Description';
